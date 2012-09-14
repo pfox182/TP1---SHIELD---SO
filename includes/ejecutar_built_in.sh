@@ -11,7 +11,11 @@ function ejecutar_built_in()
 		PARAMETRO=`echo ${1:$SEPARACION}`
 	fi
 	
-	bash /home/utnso/TP1---SHIELD---SO/built-in/$BUILT_IN.sh $PARAMETRO
+	bash /home/utnso/TP1/built-in/$BUILT_IN.sh $PARAMETRO
+	
+	#Para que el proximo built-in se ejecute bien
+	PARAMETRO=""
+
 
 	return 0
 }
