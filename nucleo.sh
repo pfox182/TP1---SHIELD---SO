@@ -17,12 +17,12 @@ while [ "$STRING" != $PCLAVE ]
 do
 
   es_un_built_in "$STRING"
-  if [ $? -eq 0 ];then #TODO:Esta fallando la autenticacion
+  if [ $? -eq 0 ];then 
 	ejecutar_built_in "$STRING"
   else
 	validar_comando "$STRING"
 	if [ $? -eq 0 ];then
-		ejecutar_comando "$STRING" #TODO:No funciona el 2° plano
+		ejecutar_comando "$STRING" 
 	fi
 
   fi	
