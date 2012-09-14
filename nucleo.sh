@@ -1,13 +1,14 @@
 #!/bin/bash
 
 source ./includes/prompt.sh
+#Incluciones de datos
+source ./nucleo.conf
 
 #Incluciones de funcionalidad
 source ./includes/validar_comando.sh
 source ./includes/es_un_built_in.sh
 source ./includes/ejecutar_built_in.sh
 source ./includes/ejecutar_comando.sh
-
 
 prompt;read STRING
 

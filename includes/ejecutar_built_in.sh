@@ -1,7 +1,5 @@
 function ejecutar_built_in()
 {	
-	PATH_BUILTS=/home/utnso/TP1---SHIELD---SO/built-in/
-	
 	SEPARACION=`expr index "$1" " "`
 	
 	if [ $SEPARACION -eq 0 ];then
@@ -11,7 +9,7 @@ function ejecutar_built_in()
 		PARAMETRO=`echo ${1:$SEPARACION}`
 	fi
 	
-	bash /home/utnso/TP1/built-in/$BUILT_IN.sh $PARAMETRO
+	bash $PATH_BUILTS$BUILT_IN.sh $PARAMETRO
 	
 	#Para que el proximo built-in se ejecute bien
 	PARAMETRO=""

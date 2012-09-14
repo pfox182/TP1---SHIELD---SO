@@ -1,7 +1,6 @@
 function ejecutar_comando()
 {
-  #$1 -> Comando a ejecutar
-  ERROR_FILE="/tmp/tmp_error" #Se usa para guardar standar_error
+  #$1 -> Comando a ejecutar   
 	
 	if [ -w /tmp ];then
 		 eval "$1" 2>$ERROR_FILE #Si no hay error => archivo vacio
