@@ -9,11 +9,9 @@ source ./includes/ejecutar_built_in.sh
 source ./includes/ejecutar_comando.sh
 
 
-PCLAVE="salir" #Salida de la shell
-
 prompt;read STRING
 
-while [ "$STRING" != $PCLAVE ]
+while [ true ]
 do
 
   es_un_built_in "$STRING"
@@ -30,6 +28,6 @@ do
   prompt;read STRING 
 done
 
-exit 0
+exit 1 #Deberia salir con el built-in salir
 
 
