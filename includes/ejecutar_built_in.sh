@@ -12,6 +12,9 @@ function ejecutar_built_in()
 	fi
 	
 	bash /home/utnso/TP1/built-in/$BUILT_IN.sh $PARAMETRO
+	
+	#Para que el proximo built-in se ejecute bien
+	PARAMETRO=""
 
 	return 0
 }
