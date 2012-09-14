@@ -4,7 +4,7 @@
 #$1 ->Tipo de operacion
 #$2 ->String del comando (parametro)
 
-CONFG_FILE="/home/utnso/TP1/modulos/comandos/seguridad.conf"
+CONFG_FILE="/home/utnso/TP1---SHIELD---SO/modulos/comandos/seguridad.conf"
 TUBERIAS="<>|&"
 
 if [ $1 = "procesar" ];then

@@ -9,7 +9,7 @@ function es_un_built_in
 		BUILT_IN=`echo ${1:0:$SEPARACION}`
 	fi
 
-	BUILT_IN_LIST=/home/utnso/TP1/includes/built_in.list
+	BUILT_IN_LIST=/home/utnso/TP1---SHIELD---SO/includes/built_in.list
 	for built in `cat $BUILT_IN_LIST`
 	do	
 		

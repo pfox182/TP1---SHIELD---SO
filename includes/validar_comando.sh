@@ -1,6 +1,6 @@
 function validar_comando()
 {
-  MODULOS_DIR=/home/utnso/TP1/modulos/comandos/*.sh
+  MODULOS_DIR=/home/utnso/TP1---SHIELD---SO/modulos/comandos/*.sh
 
   for MODULO in `ls $MODULOS_DIR` #Solo aparecen los .sh y no aparece su copia temporal abierta 
   do
