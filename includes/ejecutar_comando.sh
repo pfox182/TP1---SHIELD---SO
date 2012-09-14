@@ -16,7 +16,8 @@ function ejecutar_comando()
 
 	if [ -s /tmp/tmp_error ];then #Si existe y hay algo escrito
  		echo "El comando $1 produjo un error."
-  		echo -e "Error:\n `cat $ERROR_FILE`" # | cut -c 25- #Se suprime 0-24 -> error den la linea tal
+  		echo -e "Error:\n `cat $ERROR_FILE`"
+		echo "">$ERROR_FILE #Limpio el archivo de error para el proximo comando a ejecutar
 		return 1
 	fi
 	
