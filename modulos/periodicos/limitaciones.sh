@@ -12,4 +12,13 @@ if [ "$1" = "procesar" ];then
 		exit 1
 	fi
 fi
+
+if [ "$1" = "informacion" ];then
+	#Calculos de estado actual	
+	calcular_uso_cpu
+	CPU_ACTUAL=$?
+	
+	echo "Limite de la CPU: $MAX_CPU% , valor actual: $CPU_ACTUAL%."
+
+fi
 exit 0
