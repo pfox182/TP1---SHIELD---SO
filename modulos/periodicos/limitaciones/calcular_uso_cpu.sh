@@ -3,13 +3,15 @@
 function calcular_uso_cpu()
 {
 	#Variables
+	TERMINAL_DE_LA_SESSION=`tty`
+	TTY=${TERMINAL_DE_LA_SESSION:5:9} #Le saco /dev/ para que quede solo la terminal
 	typeset -i SUMA_TIME1=0
 	typeset -i SUMA_TIME2=0
 
 	#Obtengo tiempo de utilización del cpu
 	typeset -i CPU_TIME1=`cat /proc/uptime | cut -f1 -d " " | sed 's/\.//'` #sed -> reemplazo el . con nada
 
-	for PID in `ps auxh | grep $USER | grep -v grep | awk '{ print $2 }'`
+	for PID in `ps auxh | grep $USER | grep $TTY | grep -v grep | awk '{ print $2 }'`
 	do
 		#Verifico que el proceso exista
 		if [ -f /proc/${PID}/stat ];then
@@ -28,7 +30,7 @@ function calcular_uso_cpu()
 	#Obtengo el nuevo tiempo de utilización del cpu
 	typeset -i CPU_TIME2=`cat /proc/uptime | cut -f1 -d " " | sed 's/\.//'` #Saca el .
 
-	for PID in `ps auxh | grep utnso | grep -v grep | awk '{ print $2 }'`
+	for PID in `ps auxh | grep $USER | grep $TTY | grep -v grep | awk '{ print $2 }'`
 	do
 		#Verifico que el proceso exista
 		if [ -f /proc/${PID}/stat ];then
@@ -48,6 +50,8 @@ function calcular_uso_cpu()
 	
 return $CPU		
 }
+calcular_uso_cpu
+echo $?
 
 
 
