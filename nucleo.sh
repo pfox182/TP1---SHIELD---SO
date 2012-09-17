@@ -1,26 +1,26 @@
 #!/bin/bash
 
-source ./includes/prompt.sh
+source /home/utnso/TP1---SHIELD---SO/includes/prompt.sh
 #Incluciones de datos
-source ./nucleo.conf
+source /home/utnso/TP1---SHIELD---SO/nucleo.conf
 
 #Incluciones de funcionalidad
-source ./includes/validar_comando.sh
-source ./includes/es_un_built_in.sh
-source ./includes/ejecutar_built_in.sh
-source ./includes/ejecutar_comando.sh
+source /home/utnso/TP1---SHIELD---SO/includes/validar_comando.sh
+source /home/utnso/TP1---SHIELD---SO/includes/es_un_built_in.sh
+source /home/utnso/TP1---SHIELD---SO/includes/ejecutar_built_in.sh
+source /home/utnso/TP1---SHIELD---SO/includes/ejecutar_comando.sh
 
-
-echo $TIEMPO_MODULOS_PERIODICOS
-bash ./includes/ejecutar_modulos_periodicos.sh $TIEMPO_MODULOS_PERIODICOS &
+#Ejecucion de modulos periodicos en segundo plano
+bash /home/utnso/TP1---SHIELD---SO/includes/ejecutar_modulos_periodicos.sh $TIEMPO_MODULOS_PERIODICOS &
 
 prompt;read STRING
 
 while [ true ]
 do
   
-  #Control de modulos periodicos
-  
+  #Capturar señal enviada por algun modulo periodico
+  trap "exit 1" SIGUSR1 
+
   es_un_built_in "$STRING"
   if [ $? -eq 0 ];then 
 	ejecutar_built_in "$STRING"
