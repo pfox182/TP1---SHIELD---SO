@@ -10,11 +10,17 @@ source ./includes/es_un_built_in.sh
 source ./includes/ejecutar_built_in.sh
 source ./includes/ejecutar_comando.sh
 
+
+echo $TIEMPO_MODULOS_PERIODICOS
+bash ./includes/ejecutar_modulos_periodicos.sh $TIEMPO_MODULOS_PERIODICOS &
+
 prompt;read STRING
 
 while [ true ]
 do
-
+  
+  #Control de modulos periodicos
+  
   es_un_built_in "$STRING"
   if [ $? -eq 0 ];then 
 	ejecutar_built_in "$STRING"
