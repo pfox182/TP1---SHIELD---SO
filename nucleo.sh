@@ -9,9 +9,16 @@ source /home/utnso/TP1---SHIELD---SO/includes/validar_comando.sh
 source /home/utnso/TP1---SHIELD---SO/includes/es_un_built_in.sh
 source /home/utnso/TP1---SHIELD---SO/includes/ejecutar_built_in.sh
 source /home/utnso/TP1---SHIELD---SO/includes/ejecutar_comando.sh
+source /home/utnso/TP1---SHIELD---SO/includes/inicializar_modulos_de_comando.sh
+
+#Variables de uso comun
+TERMINAL_DE_LA_SESSION=`tty`
+
+#Iniciar modulos de comando
+inicializar_modulos_de_comando
 
 #Ejecucion de modulos periodicos en segundo plano
-bash /home/utnso/TP1---SHIELD---SO/includes/ejecutar_modulos_periodicos.sh $TIEMPO_MODULOS_PERIODICOS &
+bash /home/utnso/TP1---SHIELD---SO/includes/ejecutar_modulos_periodicos.sh $TIEMPO_MODULOS_PERIODICOS $TERMINAL_DE_LA_SESSION & 
 
 prompt;read STRING
 
