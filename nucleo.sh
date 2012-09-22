@@ -9,7 +9,7 @@
 . /home/utnso/TP1---SHIELD---SO/includes/es_un_built_in.sh
 . /home/utnso/TP1---SHIELD---SO/includes/ejecutar_built_in.sh
 . /home/utnso/TP1---SHIELD---SO/includes/ejecutar_comando.sh
-. /home/utnso/TP1---SHIELD---SO/includes/inicializar_modulos_de_comando.sh
+. /home/utnso/TP1---SHIELD---SO/includes/inicializar_modulos.sh
 . /home/utnso/TP1---SHIELD---SO/includes/terminar_procesos_en_segundo_plano.sh
 
 . /home/utnso/TP1---SHIELD---SO/includes/ejemplo
