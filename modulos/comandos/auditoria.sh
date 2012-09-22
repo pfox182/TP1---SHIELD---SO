@@ -14,11 +14,11 @@ if [ "$1" = "procesar" ];then
 fi
 
 if [ "$1" = "informacion" ];then
-	TAMANO_ARCHIVO_LOG=`stat -c %s $ARCHIVO_LOG_LOCAL` #Obtengo el tamaño del archivo de log local.	
-	echo "Tamaño maximo del archivo local de log: $TAMANO_MAXIMO% , IP del servidor remoto de logueo: $IP_SERVIDOR_REMOTO% , tamaño del archivo de log local: $TAMANO_ARCHIVO_LOG%."
+	TAMANO_ARCHIVO_LOG=`stat -c %s $OUTPUT_FILE` #Obtengo el tamaño del archivo de log local.	
+	echo "Tamaño maximo del archivo local de log: $TAMANO_MAXIMO , IP del servidor remoto de logueo: $IP_SERVIDOR_REMOTO , tamaño del archivo de log local: $TAMANO_ARCHIVO_LOG."
 
 fi
 
-exit 0 
+
 
 
