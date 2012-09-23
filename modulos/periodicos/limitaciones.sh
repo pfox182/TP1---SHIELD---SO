@@ -3,7 +3,6 @@
 MAX_CPU=20;MAX_MEM=10;MAX_PROCES=10;MAX_SOCK=2;MAX_OPEN_FILES=10;
 
 #$1 -> mensaje de la interface ("iniciar","procesar",detener"...)
-#$2 -> la terminal donde se encuentra logeado el usuario
 
 #Archivos
 CONF_FILE=/home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/limitaciones.conf
@@ -36,27 +35,21 @@ if [ "$1" = "detener" ];then
 fi
 
 #Calculos de estadoS (Como el mensaje no fue iniciar o detener, voy a nececitar los estados)
-	#Controlo el $2
-	if [ ! $2 ];then
-		echo "Erro falta el argumento de TTY."
-		exit 1
-	fi
-
-CPU_ACTUAL=$(uso_de_cpu $2)
+CPU_ACTUAL=$(uso_de_cpu)
 	if [ `echo $CPU_ACTUAL | grep -E ^[\.]` ];then #Si el resultado es .6% lo transforma en 0.6%
 		CPU_ACTUAL="0$CPU_ACTUAL"
 	fi	
 
-MEM_ACTUAL=$(uso_de_mem $2)
+MEM_ACTUAL=$(uso_de_mem )
 	if [ `echo $MEM_ACTUAL | grep -E ^[\.]` ];then
 		MEM_ACTUAL="0$MEM_ACTUAL"
 	fi
 
-CANT_PROCESS_ACTUAL=$(cantidad_de_procesos $2) #Siempre es un numero entero
+CANT_PROCESS_ACTUAL=$(cantidad_de_procesos) #Siempre es un numero entero
 
-CANT_ARCHIVOS_ACTUAL=$(cantidad_de_archivos_abiertos $2) #Siempre es un numero entero
+CANT_ARCHIVOS_ACTUAL=$(cantidad_de_archivos_abiertos) #Siempre es un numero entero
 
-CANT_SOCKETS_ACTUAL=$(cantidad_de_sockets_abiertos $2) #Siempre es un numero entero
+CANT_SOCKETS_ACTUAL=$(cantidad_de_sockets_abiertos) #Siempre es un numero entero
 
 if [ "$1" = "procesar" ];then
 	#Control de consumo de CPU	

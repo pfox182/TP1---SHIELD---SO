@@ -1,7 +1,6 @@
 #!/bin/bash
 function cantidad_de_archivos_abiertos()
 {	
-	local TTY=$1
 	local CANT_TOTAL=0
 	local ARCHIVOS_ABIERTOS=0
 

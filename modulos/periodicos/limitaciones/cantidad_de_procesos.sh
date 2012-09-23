@@ -1,7 +1,6 @@
 #!/bin/bash
 function cantidad_de_procesos()
 {	
-	local TTY=$1
 	local CANT_TOTAL=0
 
 	PROCESS=`ps auxh | grep $USER | grep $TTY | grep -v grep | grep -v $0 | awk '{ print $1 }' | wc -l`

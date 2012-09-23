@@ -1,7 +1,6 @@
 #!/bin/bash
 function uso_de_cpu()
 {	
-	local TTY=$1
 	local CPU_TOTAL=0.0
 
 	for PROCESS_CPU in `ps auxh | grep $USER | grep $TTY |grep -v grep | awk '{ print $3 }'` 
