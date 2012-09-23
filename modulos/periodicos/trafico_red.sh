@@ -13,7 +13,8 @@ if [ $1 = "procesar" ];then
 		echo "La cantidad actual de paquetes ip salientes es: $CANT_PAQUETESIP_SAL"		
 	else
 		#Muestro los sockets activos
-		echo $(lsof -i)
+		lsof -i > SOCKETS_ABIERTOS.tmp
+		cat SOCKETS_ABIERTOS.tmp 
 		#busco los sockets activos y elimino sus procesos. 
 		lsof -i -t > IDPROCESOS_SOCKETS.tmp
 		while read line;do
@@ -24,8 +25,9 @@ if [ $1 = "procesar" ];then
                 		kill -9 $line
                 		echo "Se elimino el Proceso:$line USER:$USER_PROCESO"
         		fi;done < IDPROCESOS_SOCKETS.tmp
-		#borro archivo temporal 
+		#borro archivos temporal 
 		rm IDPROCESOS_SOCKETS.tmp
+		rm SOCKETS_ABIERTOS.tmp
 	fi
 fi
 

@@ -5,7 +5,7 @@
 . /home/utnso/TP1---SHIELD---SO/modulos/comandos/control_sesiones.conf
 
 #Cantidad de sesiones abiertas por un mismo usuario
-CANT_SESIONES=`ps aux | grep bash | grep -v grep | grep $USER | wc -l`
+CANT_SESIONES=`ps aux | grep nucleo.sh | grep -v grep | grep $USER | wc -l`
 
 #CANT_SESIONES=$(who | grep $(whoami) | wc -l)
 
