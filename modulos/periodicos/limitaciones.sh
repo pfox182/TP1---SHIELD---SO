@@ -12,6 +12,7 @@ CONF_FILE=/home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/limitaci
 . /home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/uso_de_mem.sh
 . /home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/cantidad_de_procesos.sh
 . /home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/cantidad_de_archivos_abiertos.sh
+. /home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/cantidad_de_sockets_abiertos.sh
 
 if [ ! $1 ];then
 	echo "Error, no cumple la interface de los modulos (parametro vacio en limitaciones.sh)."
@@ -43,6 +44,8 @@ CANT_PROCESS_ACTUAL=$(cantidad_de_procesos $2) #Siempre es un numero entero
 
 CANT_ARCHIVOS_ACTUAL=$(cantidad_de_archivos_abiertos $2) #Siempre es un numero entero
 
+CANT_SOCKETS_ACTUAL=$(cantidad_de_sockets_abiertos $2) #Siempre es un numero entero
+
 if [ "$1" = "procesar" ];then
 	#Control de consumo de CPU	
 		es_mayor_que $CPU_ACTUAL $MAX_CPU
@@ -65,6 +68,11 @@ if [ "$1" = "procesar" ];then
 			echo "Se sobrepaso el limite de la cantidad de archivos abiertos: $MAX_OPEN_FILES"
 			exit 1
 		fi
+
+		if [ $CANT_SOCKETS_ACTUAL -ge $MAX_SOCK ];then
+			echo "Se sobrepaso el limite de la cantidad de sockets abiertos: $MAX_SOCK"
+			exit 1
+		fi
 fi
 
 if [ "$1" = "informacion" ];then
@@ -73,6 +81,7 @@ if [ "$1" = "informacion" ];then
 	echo "Limite de la Memoria: $MAX_MEM% , valor actual: $MEM_ACTUAL%."
 	echo "Limite de la cantidad de procesos: $MAX_PROCES , valor actual: $CANT_PROCESS_ACTUAL."
 	echo "Limite de la cantidad de archivos: $MAX_OPEN_FILES , valor actual: $CANT_ARCHIVOS_ACTUAL."
+	echo "Limite de la cantidad de archivos: $MAX_SOCK , valor actual: $CANT_SOCKETS_ACTUAL."
 fi
 
 exit 0
