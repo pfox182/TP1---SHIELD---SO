@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MAX_CPU=10;MAX_MEM=40;MAX_PROCES=10;MAX_SOCK=2;MAX_OPEN_FILES=10;
+MAX_CPU=20;MAX_MEM=10;MAX_PROCES=10;MAX_SOCK=2;MAX_OPEN_FILES=10;
 
 #$1 -> mensaje de la interface ("iniciar","procesar",detener"...)
 #$2 -> la terminal donde se encuentra logeado el usuario
@@ -8,6 +8,7 @@ MAX_CPU=10;MAX_MEM=40;MAX_PROCES=10;MAX_SOCK=2;MAX_OPEN_FILES=10;
 #Archivos
 CONF_FILE=/home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/limitaciones.conf
 . /home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/uso_de_cpu.sh
+. /home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/uso_de_mem.sh
 
 if [ ! $1 ];then
 	echo "Error, no cumple la interface de los modulos (parametro vacio en limitaciones.sh)."
@@ -24,23 +25,34 @@ if [ $1 = "iniciar" ];then
   exit 0
 fi
 
+#Calculos de estadoS (Como el mensaje no fue iniciar, voy a nececitar los estados)
+CPU_ACTUAL=$(uso_de_cpu $2)
+	if [ `echo $CPU_ACTUAL | grep -E ^[\.]` ];then #Si el resultado es .6% lo transforma en 0.6%
+		CPU_ACTUAL="0$CPU_ACTUAL"
+	fi	
+
+MEM_ACTUAL=$(uso_de_mem $2)
+	if [ `echo $MEM_ACTUAL | grep -E ^[\.]` ];then
+		MEM_ACTUAL="0$MEM_ACTUAL"
+	fi
 
 if [ "$1" = "procesar" ];then
 	#Control de consumo de CPU	
-		uso_de_cpu $2
-		CPU_ACTUAL=$?
-		if [ $CPU_ACTUAL -ge $MAX_CPU ];then
+		if [[ $CPU_ACTUAL > $MAX_CPU ]];then
 			echo "Se sobrepaso el limite de uso del CPU: $MAX_CPU%"
+			exit 1
+		fi
+		
+		if [[ $MEM_ACTUAL > $MAX_MEM ]];then
+			echo "Se sobrepaso el limite de uso del Memoria: $MAX_MEM%"
 			exit 1
 		fi
 fi
 
 if [ "$1" = "informacion" ];then
-	#Calculos de estado actual
-	uso_de_cpu $2	
-	CPU_ACTUAL=$?
-	
+	#Informar por pantalla
 	echo "Limite de la CPU: $MAX_CPU% , valor actual: $CPU_ACTUAL%."
+	echo "Limite de la Memoria: $MAX_MEM% , valor actual: $MEM_ACTUAL%."
 
 fi
 

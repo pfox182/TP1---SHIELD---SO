@@ -12,6 +12,8 @@ function uso_de_cpu()
 	local SEPARACION=`expr $SEPARACION - 1`
 	typeset -i CPU_APROX=`echo ${CPU_TOTAL:0:$SEPARACION}`
 	
+	echo "$CPU_TOTAL"
+
 	return $CPU_APROX
 }
 
