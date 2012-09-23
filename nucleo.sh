@@ -12,7 +12,7 @@
 . /home/utnso/TP1---SHIELD---SO/includes/inicializar_modulos.sh
 . /home/utnso/TP1---SHIELD---SO/includes/terminar_procesos_en_segundo_plano.sh
 
-. /home/utnso/TP1---SHIELD---SO/includes/ejemplo
+
 #Variables de uso comun
 TERMINAL_DE_LA_SESSION=`tty`
 
@@ -35,16 +35,10 @@ do
   #Comenzar a leer comandos
   prompt;read STRING
 
-  es_un_built_in "$STRING"
-  if [ $? -eq 0 ];then 
-	ejecutar_built_in "$STRING"
-  else
 	validar_comando "$STRING"
 	if [ $? -eq 0 ];then
 		ejecutar_comando "$STRING" 
 	fi
-
-  fi	
 
 done
 
