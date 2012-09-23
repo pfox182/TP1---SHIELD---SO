@@ -26,10 +26,22 @@ if [ $1 = "iniciar" ];then
   sed -e "3s/.*/`echo $VARIABLES_DEL_ARCHIVO`/g" $0 > $0.tmp;mv -f $0.tmp $0
 	#sed -e "3s/.*/`echo "COMANDOS="$COMANDOS_DEL_ARCHIVO`/g" $0 ->Sustituye la linea 3 del archivo limitaciones.sh($0) y lo muestra por pantalla
 	#> $0.tmp;mv $0.tmp $0 ->Captura la salida del comando anterior y lo guarda en un archivo temporal, que luego reescribe el script limitaciones.sh
-  exit 0
+  exit $?
 fi
 
-#Calculos de estadoS (Como el mensaje no fue iniciar, voy a nececitar los estados)
+if [ "$1" = "detener" ];then
+	
+	sed -e "3s/.*/ /g" $0 > $0.tmp;mv -f $0.tmp $0 #Borra la linea 3
+	exit $?
+fi
+
+#Calculos de estadoS (Como el mensaje no fue iniciar o detener, voy a nececitar los estados)
+	#Controlo el $2
+	if [ ! $2 ];then
+		echo "Erro falta el argumento de TTY."
+		exit 1
+	fi
+
 CPU_ACTUAL=$(uso_de_cpu $2)
 	if [ `echo $CPU_ACTUAL | grep -E ^[\.]` ];then #Si el resultado es .6% lo transforma en 0.6%
 		CPU_ACTUAL="0$CPU_ACTUAL"
@@ -73,6 +85,8 @@ if [ "$1" = "procesar" ];then
 			echo "Se sobrepaso el limite de la cantidad de sockets abiertos: $MAX_SOCK"
 			exit 1
 		fi
+		
+		exit 0
 fi
 
 if [ "$1" = "informacion" ];then
@@ -82,6 +96,8 @@ if [ "$1" = "informacion" ];then
 	echo "Limite de la cantidad de procesos: $MAX_PROCES , valor actual: $CANT_PROCESS_ACTUAL."
 	echo "Limite de la cantidad de archivos: $MAX_OPEN_FILES , valor actual: $CANT_ARCHIVOS_ACTUAL."
 	echo "Limite de la cantidad de archivos: $MAX_SOCK , valor actual: $CANT_SOCKETS_ACTUAL."
+	
+	exit 0
 fi
 
 exit 0
