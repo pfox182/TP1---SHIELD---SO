@@ -3,9 +3,8 @@
 #cargo archivo de configuracion
 . /home/utnso/TP1---SHIELD---SO/modulos/periodicos/trafico_red.conf 
 
-ifconfig $(ifconfig | grep eth | awk '{print$1}') | grep "TX" > paquetes.tmp 
-CANT_PAQUETESIP_SAL=$(sed '2,$d' paquetes.tmp | awk '{print$2}' | cut -d ":" -f 2)
-rm paquetes.tmp
+CANT_PAQUETESIP_SAL=$(ifconfig $(ifconfig | grep eth | awk '{print$1}') | grep -m 1 "TX" | awk '{print$2}' | cut -d ":" -f 2)
+
 
 #comparo cantidad maxima de paquetes ip salientes con la cantidad actual.
 if [ $1 = "procesar" ];then
