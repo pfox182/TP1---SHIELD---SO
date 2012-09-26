@@ -1,8 +1,8 @@
 #!/bin/bash
 
 . /home/utnso/TP1---SHIELD---SO/includes/prompt.sh
-#Incluciones de datos
-. /home/utnso/TP1---SHIELD---SO/nucleo.conf
+#Incluciones de variables
+. /home/utnso/TP1---SHIELD---SO/includes/nucleo.variables
 
 #Incluciones de funcionalidad
 . /home/utnso/TP1---SHIELD---SO/includes/validar_comando.sh

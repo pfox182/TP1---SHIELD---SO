@@ -1,0 +1,16 @@
+#Configuracion modulos periodicos
+TIEMPO_MODULOS_PERIODICOS=10 #en segundos
+
+#Configuracion de Rutas ( rutas ejecutables /etc/shield/includes * rutas de configuracion /home/$USER/.shield/.... )
+	#ejecutar_built_in.sh
+		PATH_BUILTS=/home/utnso/TP1---SHIELD---SO/built-in/
+	#ejecutar_comando.sh
+		ERROR_FILE=/home/$USER/TP1---SHIELD---SO/.tmp_error
+	#es_un_built_in.sh
+		BUILT_IN_LIST=/home/utnso/TP1---SHIELD---SO/includes/built_in.list
+	#validar_comando.sh
+		MODULOS_DE_COMANDO=/home/utnso/TP1---SHIELD---SO/modulos_de_comando.config #Cada modulo termina en :on o :off
+	#inicializar_modulos.sh
+	#detener_modulos.sh
+		MODULOS_PERIODICOS=/home/utnso/TP1---SHIELD---SO/modulos_periodicos.config #Cada modulo termina en :on o :off
+		
