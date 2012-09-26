@@ -39,7 +39,7 @@ case $1 in
 		;;
 
 	detener)
-		echo "Falta implementar detener en $0"
+		unset COMANDOS
 		;;
 
 	*)

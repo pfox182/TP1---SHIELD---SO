@@ -6,12 +6,9 @@ function cantidad_de_archivos_abiertos()
 
 	for PID in `ps auxh | grep $USER | grep $TTY | grep -v grep | grep -v $0 | awk '{ print $2 }'`
 	do
-
-		if [ -f /proc/${PID}/stat ];then
-			ARCHIVOS_ABIERTOS=`file /proc/${PID}/fd/* | grep -v "/dev/$TTY" | wc -l`
-			CANT_TOTAL=`expr $CANT_TOTAL + $ARCHIVOS_ABIERTOS`
-		fi
-		
+		#Si el proceso no existe lfof devuelve 0
+		ARCHIVOS_ABIERTOS=`lsof -p $PID | wc -l`
+		CANT_TOTAL=`expr $CANT_TOTAL + $ARCHIVOS_ABIERTOS`
 	done
 
 	echo "$CANT_TOTAL"

@@ -49,7 +49,7 @@ case $1 in
 				echo "Se sobrepaso el limite de uso del CPU: $MAX_CPU%"
 				exit 1
 			fi
-			es_mayor_que $CPU_ACTUAL $MAX_CPU
+			es_mayor_que $MEM_ACTUAL $MAX_MEM
 			if [ $? = 0 ];then
 				echo "Se sobrepaso el limite de uso del Memoria: $MAX_MEM%"
 				exit 1
@@ -60,7 +60,7 @@ case $1 in
 				exit 1
 			fi
 		
-			if [ $CANT_ARCHIVOS_ACTUAL -ge $MAX_OPEN_FILES ];then
+			if [ $CANT_ARCHIVOS_ACTUAL -ge $MAX_SOCK ];then
 				echo "Se sobrepaso el limite de la cantidad de archivos abiertos: $MAX_OPEN_FILES"
 				exit 1
 			fi
@@ -85,7 +85,11 @@ case $1 in
 		exit 0
 		;;
 	detener)
-		echo "Falta implementar detener en $0"
+		unset MAX_CPU
+		unset MAX_MEM
+		unset MAX_PROCES
+		unset MAX_SOCK
+		unset MAX_SOCK
 		;;
 
 	*)
