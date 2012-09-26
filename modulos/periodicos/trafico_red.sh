@@ -3,15 +3,13 @@
 #cargo archivo de configuracion
 . /home/utnso/TP1---SHIELD---SO/modulos/periodicos/trafico_red.conf 
 
-CANT_PAQUETESIP_SAL=$(ifconfig $(ifconfig | grep eth | awk '{print$1}'
-) | grep "Paquetes TX" | awk '{print$2}' | cut -d ":" -f 2)
-
+ifconfig $(ifconfig | grep eth | awk '{print$1}') | grep "TX" > paquetes.tmp 
+CANT_PAQUETESIP_SAL=$(sed '2,$d' paquetes.tmp | awk '{print$2}' | cut -d ":" -f 2)
+rm paquetes.tmp
 
 #comparo cantidad maxima de paquetes ip salientes con la cantidad actual.
 if [ $1 = "procesar" ];then
-	if [ $CANT_MAX_PAQUETESIP_SAL -ge $CANT_PAQUETESIP_SAL ];then
-		echo "La cantidad actual de paquetes ip salientes es: $CANT_PAQUETESIP_SAL"		
-	else
+	if [ $CANT_PAQUETESIP_SAL -ge $CANT_MAX_PAQUETESIP_SAL ];then	
 		#Muestro los sockets activos
 		lsof -i > SOCKETS_ABIERTOS.tmp
 		cat SOCKETS_ABIERTOS.tmp 
@@ -29,6 +27,7 @@ if [ $1 = "procesar" ];then
 		rm IDPROCESOS_SOCKETS.tmp
 		rm SOCKETS_ABIERTOS.tmp
 	fi
+	exit $?
 fi
 
 
@@ -37,6 +36,5 @@ fi
 if [ $1 = "informacion" ];then
 	echo "La cantidad actual de paquetes ip salientes es : $CANT_PAQUETESIP_SAL"
 	echo "La cantidad maxima de paquetes ip salientes permitidos por usuario es: $CANT_MAX_PAQUETESIP_SAL"
+ 	exit $?
 fi
-
-	
