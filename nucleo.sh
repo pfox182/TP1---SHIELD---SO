@@ -20,9 +20,8 @@ export TERMINAL_DE_LA_SESSION=`tty`
 export TTY=${TERMINAL_DE_LA_SESSION:5} 
 
 #Registrar e inicializar todos los modulos
-MSJ_ERROR=$(registrar_e_inicializar_modulos $TERMINAL_DE_LA_SESSION)
+registrar_e_inicializar_modulos
 if [ $? = 1 ];then
-	echo $MSJ_EROR
 	exit 1
 fi
 
