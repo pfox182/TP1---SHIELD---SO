@@ -60,7 +60,7 @@ case $1 in
 				exit 1
 			fi
 		
-			if [ $CANT_ARCHIVOS_ACTUAL -ge $MAX_SOCK ];then
+			if [ $CANT_ARCHIVOS_ACTUAL -ge $MAX_OPEN_FILES ];then
 				echo "Se sobrepaso el limite de la cantidad de archivos abiertos: $MAX_OPEN_FILES"
 				exit 1
 			fi
