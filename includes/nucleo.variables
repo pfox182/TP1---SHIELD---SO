@@ -1,4 +1,7 @@
-#Configuracion modulos periodicos
+#Configuracion tiepo de verificacion de archivos
+TIEMPO_VERIFICAR_ARCHIVOS_DE_CONFIGURACION=10 #en segundos
+
+#Configuracion tiempo modulos periodicos
 TIEMPO_MODULOS_PERIODICOS=10 #en segundos
 
 #Configuracion de Rutas ( rutas ejecutables /etc/shield/includes * rutas de configuracion /home/$USER/.shield/.... )
@@ -13,4 +16,6 @@ TIEMPO_MODULOS_PERIODICOS=10 #en segundos
 	#inicializar_modulos.sh
 	#detener_modulos.sh
 		MODULOS_PERIODICOS=/home/utnso/TP1---SHIELD---SO/modulos_periodicos.config #Cada modulo termina en :on o :off
+	#verificar_cambios_archivos_de_configuracion.sh ->Como es un script y no una funcion, hay que exportar la variable
+		export ARCHIVOS_DE_CONFIGURACION_MODULOS=/home/utnso/TP1---SHIELD---SO/modulos
 		

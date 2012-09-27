@@ -1,12 +1,10 @@
 function terminar_procesos_en_segundo_plano()
 {
-	TERMINAL_DE_LA_SESSION=$1
-	SENIAL=$2 #Señal a enviar a los procesos de la sesion
-	TTY=${TERMINAL_DE_LA_SESSION:5} #Le saco /dev/ para que quede solo la terminal
+	SENIAL=$1 #Señal a enviar a los procesos de la sesion
 	
 	#Control de parametros
-	if [ -z "$1" -o -z "$2" ];then 
-		echo "Fltan parametros para terminar_procesos_en_segundo_plano.sh"
+	if [ -z "$1" ];then 
+		echo "Falta la Señal a enviar por terminar_procesos_en_segundo_plano.sh"
 		return 1
 	fi
 	

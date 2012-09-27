@@ -16,6 +16,8 @@ function inicializar_modulos()
 		fi
 	fi
   done
-
- return 0  #Todos los modulos fueron validados
+  
+  #Guardo el momento en el que se cargaron
+  export ULTIMA_ACTUALIZACION_DE_CONFIGURACION=`date "+%s"` #%s -> epoch time ( una especie de entero del tiempo actual )
+  return 0  #Todos los modulos fueron validados
 }
