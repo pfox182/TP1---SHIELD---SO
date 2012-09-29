@@ -24,7 +24,9 @@ case "$1" in
 		echo "La cantidad actual de sesiones abiertas es: $CANT_SESIONES"
  	 	echo "La cantidad maxima de sesiones permitidas por usuario es: $CANT_MAX_SESIONES"
 		exit 0;;
+	
+	"detener")
+		unset CANT_MAX_SESIONES;;
 esac
-
 
 

@@ -7,7 +7,7 @@ CANT_PAQUETESIP_SAL=$(ifconfig $(ifconfig | grep eth | awk '{print$1}') | grep -
 
 
 case "$1" in
-	"procesar" )
+	"procesar")
 		#comparo cantidad maxima de paquetes ip salientes con la cantidad actual.
 		if [ $CANT_PAQUETESIP_SAL -ge $CANT_MAX_PAQUETESIP_SAL ];then	
 			#Muestro los sockets activos
@@ -29,12 +29,12 @@ case "$1" in
 		fi
 		exit $?;;
 
-	#informo el estado actual de paquetes ip salientes y la cantidad maxima permitida.
-	"informacion" )
+	"informacion")
 		echo "La cantidad actual de paquetes ip salientes es : $CANT_PAQUETESIP_SAL"
 		echo "La cantidad maxima de paquetes ip salientes permitidos por usuario es: $CANT_MAX_PAQUETESIP_SAL"
  		exit $?;;
-
+	"detener")
+		unset CANT_MAX_PAQUETESIP_SAL
 esac
 
 
