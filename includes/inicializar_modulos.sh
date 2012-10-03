@@ -11,7 +11,9 @@ function inicializar_modulos()
 	if [ "$MODULO_ACTIVO" = "on" ];then
 		source $MODULO iniciar #Se utiliza source para que se exporten las variables a la sesion de trabajo
 		if [ $? -ne 0 ];then
-			echo "Error al inicializar modulo: $MODULO"
+			local MSJ_ERR="Error al inicializar modulo: $MODULO"
+			echo $MSJ_ERR
+			echo $MSJ_ERR >> $LOG_ERR_FILE
 			return 1	#Si llega a fallar 1 modulo sale
 		fi
 	fi

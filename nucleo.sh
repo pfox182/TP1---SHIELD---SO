@@ -21,6 +21,9 @@ export TTY=${TERMINAL_DE_LA_SESSION:5}
 
 #Registrar e inicializar todos los modulos
 registrar_e_inicializar_modulos
+if [ $? = 1 ];then #Se produjo un error en algun modulo
+	exit 1
+fi
 
 #Verificar cambios en los archivos de configuracion en segundo plano
 bash /home/utnso/TP1---SHIELD---SO/includes/verificar_cambios_archivos_de_configuracion.sh $TIEMPO_VERIFICAR_ARCHIVOS_DE_CONFIGURACION & 

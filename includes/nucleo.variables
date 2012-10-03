@@ -4,6 +4,7 @@ TIEMPO_VERIFICAR_ARCHIVOS_DE_CONFIGURACION=10 #en segundos
 #Configuracion tiempo modulos periodicos
 TIEMPO_MODULOS_PERIODICOS=10 #en segundos
 
+LOG_ERR_FILE=/home/utnso/TP1---SHIELD---SO/errores.log
 #Configuracion de Rutas ( rutas ejecutables /etc/shield/includes * rutas de configuracion /home/$USER/.shield/.... )
 	#ejecutar_built_in.sh
 		PATH_BUILTS=/home/utnso/TP1---SHIELD---SO/built-in/

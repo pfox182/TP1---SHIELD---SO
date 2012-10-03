@@ -11,7 +11,9 @@ function detener_modulos()
 		if [ "$MODULO_ACTIVO" = "on" ];then
 			source ${MODULO:0:$SEPARACION} detener #Si se esta ejecutando se detiene
 			if [ $? = 1 ];then
-				echo "Error al detener el modulo de $MODULO."
+				local MSJ_ERR="Error al detener el modulo de $MODULO."
+				echo $MSJ_ERR
+				echo $MSJ_ERR >> $LOG_ERR_FILE
 				return 1
 			fi
 		fi
