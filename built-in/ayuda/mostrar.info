@@ -1,0 +1,13 @@
+----------------------------------------------------------------------
+NOMBRE
+	mostrar
+
+DESCRIPCCION
+	Muestra el valor de la variable interna del shell de nombre “variable1”
+
+SINOPSIS
+	mostrar variable1
+----------------------------------------------------------------------
+
+
+

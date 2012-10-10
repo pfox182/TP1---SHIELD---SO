@@ -1,0 +1,9 @@
+----------------------------------------------------------------------
+NOMBRE
+	listar_modulos
+
+DESCRIPCCION
+	Presenta en pantalla los paths absolutos de los módulos que tiene activo el usuario.
+----------------------------------------------------------------------
+
+

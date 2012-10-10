@@ -1,0 +1,9 @@
+----------------------------------------------------------------------
+NOMBRE
+	actualizar_modulos
+
+DESCRIPCCION
+	Invoca a la función del núcleo Registrar e inicializar módulos.
+
+----------------------------------------------------------------------
+

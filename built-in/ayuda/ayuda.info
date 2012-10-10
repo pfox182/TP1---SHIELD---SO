@@ -1,0 +1,13 @@
+----------------------------------------------------------------------
+NOMBRE
+	ayuda
+
+DESCRIPCCION
+       -Presenta en pantalla una breve ayuda el builtin indicado. Si no se recibe parámetro, 
+	presentará la ayuda de todos los builtins.
+
+SINOPSIS
+
+	ayuda [builtin] 
+----------------------------------------------------------------------
+

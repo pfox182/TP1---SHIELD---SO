@@ -4,7 +4,7 @@
 
 case "$1" in 
 	"procesar") 
-		LINE=$(ps auxh | sort -rk3 | head -1)  
+		LINE=$(ps auxh | grep $USER | sort -rk3 | head -1)  
 		ID_PROCESO=$(echo $LINE | awk '{print $2}')
 		CONSUMO_CPU_PROCESO=$(echo "$(echo $LINE | awk '{print $3}') * 10" | bc | cut -f1 -d'.')
 		NICE_PROCESO=$(ps -Al | grep -m 1 $ID_PROCESO | awk '{print $8}')

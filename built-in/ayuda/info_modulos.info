@@ -1,0 +1,14 @@
+----------------------------------------------------------------------
+NOMBRE
+	info_modulos
+
+DESCRIPCCION
+	A cada módulo activo para el usuario le indica que imprima en pantalla información sobre sí mismo.
+        Si al built-in se lo invoca en la forma “info_modulos string”, sólo imprimirá la información 
+	de los modulos cuyo nombre contengan al string recibido.
+SINOPSIS
+	info_modulos [string] 
+----------------------------------------------------------------------
+
+
+
