@@ -24,7 +24,7 @@ function calculos_de_estados()
 	
 }
 #Archivos
-CONF_FILE=/home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/limitaciones.conf
+CONF_FILE=/home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones.conf
 . /home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/es_mayor_que.sh #Compara numeros decimales
 . /home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/uso_de_cpu.sh
 . /home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/uso_de_mem.sh
@@ -61,7 +61,7 @@ case $1 in
 			fi
 		
 			if [ $CANT_ARCHIVOS_ACTUAL -ge $MAX_OPEN_FILES ];then
-				echo "Se sobrepaso el limite de la cantidad de archivos abiertos: $MAX_OPEN_FILES"
+				echo "Se sobrepaso el limite de la cantidad de archivos abiertos: $MAX_OPEN_FILES, la cantidad abierta es $CANT_ARCHIVOS_ACTUAL"
 				exit 1
 			fi
 

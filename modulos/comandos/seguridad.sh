@@ -10,13 +10,13 @@ TUBERIAS="<>|&"
 case $1 in
 	iniciar)
  		#Leer el archivo de configuracion y exportar la variable con los valores asignados
-  		export COMANDOS=`cat $CONFG_FILE`
+  		export COMANDOS_RESTRINGIDOS=`cat $CONFG_FILE`
 		#No se le pone exit, porque sino al llamarlo con source corta la ejecucion del script que lo llamo ( ej: nucleo.sh )
 		;;
 
 
 	procesar)
-  		for COMANDO_RESTRINGIDO in $COMANDOS
+  		for COMANDO_RESTRINGIDO in $COMANDOS_RESTRINGIDOS
   		do
   			STR_FILTRADO=`echo " $2 " | grep -E "( $COMANDO_RESTRINGIDO | $COMANDO_RESTRINGIDO[$TUBERIAS]|[$TUBERIAS]$COMANDO_RESTRINGIDO |[$TUBERIAS]$CMDR[$TUBERIAS])"`
   		if [ -n "$STR_FILTRADO" ];then #Contiene un comando restringido
@@ -31,7 +31,7 @@ case $1 in
  
 	informacion)
   		echo "Lista de comandos restringidos:"
-  		for COMANDO_RESTRINGIDO in $COMANDOS
+  		for COMANDO_RESTRINGIDO in $COMANDOS_RESTRINGIDOS
  		do
   			echo $COMANDO_RESTRINGIDO
  		done
