@@ -12,7 +12,7 @@ function enviar_senial()
 function el_modulos_esta_activo()
 {
 	#$1 es el nombre del modulo
-	local CONFIG_DEL_MODULO=`( cat $MODULOS_DE_COMANDO;cat $MODULOS_PERIODICOS ) | grep $1` #TODO:Agregar el filtrado por expresion regular
+	local CONFIG_DEL_MODULO=`( cat $MODULOS_DE_COMANDO;cat $MODULOS_PERIODICOS ) | grep -E "\/.*/$1\.sh\:.."
 	local SEPARACION=`expr index "$CONFIG_DEL_MODULO" ":"`
 	local MODULO_ACTIVO=${CONFIG_DEL_MODULO:$SEPARACION}
 	if [ "$MODULO_ACTIVO" = "on" ];then
