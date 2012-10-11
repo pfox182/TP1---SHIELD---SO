@@ -12,8 +12,8 @@ while ( sleep $1 );do
 	for MODULO in `cat $MODULOS_PERIODICOS`
 	do	
 		#Me fijo si esta activo
-		local SEPARACION=`expr index "$MODULO" ":"`
-		local MODULO_ACTIVO="${MODULO:$SEPARACION}"
+		SEPARACION=`expr index "$MODULO" ":"`
+		MODULO_ACTIVO="${MODULO:$SEPARACION}"
 		SEPARACION=`expr $SEPARACION - 1` #Retrocedo 1 para saltar el ":"
 		MODULO="${MODULO:0:$SEPARACION}"
 
