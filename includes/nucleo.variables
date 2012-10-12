@@ -4,19 +4,20 @@ export TIEMPO_VERIFICAR_ARCHIVOS_DE_CONFIGURACION=10 #en segundos
 #Configuracion tiempo modulos periodicos
 export TIEMPO_MODULOS_PERIODICOS=10 #en segundos
 
-export LOG_ERR_FILE=/home/utnso/TP1---SHIELD---SO/errores.log
+export LOG_ERR_FILE=/home/$USER/.shield/errores.log
+
 #Configuracion de Rutas ( rutas ejecutables /etc/shield/includes * rutas de configuracion /home/$USER/.shield/.... )
 	#ejecutar_built_in.sh
-		export PATH_BUILTS=/home/utnso/TP1---SHIELD---SO/built-in/
+		export PATH_BUILTS=$CARPETA_DE_INSTALACION/built-in/
 	#ejecutar_comando.sh
-		export ERROR_FILE=/home/$USER/TP1---SHIELD---SO/.tmp_error
+		export ERROR_FILE=/home/$USER/.shield/.tmp_error
 	#es_un_built_in.sh
-		export BUILT_IN_LIST=/home/utnso/TP1---SHIELD---SO/includes/built_in.list
+		export BUILT_IN_LIST=$CARPETA_DE_INSTALACION/includes/built_in.list
 	#validar_comando.sh
-		export MODULOS_DE_COMANDO=/home/utnso/TP1---SHIELD---SO/modulos_de_comando.config #Cada modulo termina en :on o :off
+		export MODULOS_DE_COMANDO=/home/$USER/.shield/modulos_de_comando.conf #Cada modulo termina en :on o :off
 	#inicializar_modulos.sh
 	#detener_modulos.sh
-		export MODULOS_PERIODICOS=/home/utnso/TP1---SHIELD---SO/modulos_periodicos.config #Cada modulo termina en :on o :off
+		export MODULOS_PERIODICOS=/home/$USER/.shield/modulos_periodicos.conf #Cada modulo termina en :on o :off
 	#verificar_cambios_archivos_de_configuracion.sh ->Como es un script y no una funcion, hay que exportar la variable
-		export ARCHIVOS_DE_CONFIGURACION_MODULOS=/home/utnso/TP1---SHIELD---SO/modulos
+		export ARCHIVOS_DE_CONFIGURACION_MODULOS=/home/$USER/.shield/modulos
 		

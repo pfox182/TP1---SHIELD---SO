@@ -21,14 +21,15 @@ function calculos_de_estados()
 	CANT_SOCKETS_ACTUAL=$(cantidad_de_sockets_abiertos) #Siempre es un numero entero
 	
 }
+
 #Archivos
 CONF_FILE=/home/$USER/.shield/modulos/periodicos/limitaciones.conf
-. ./modulos/periodicos/limitaciones/es_mayor_que.sh #Compara numeros decimales
-. ./modulos/periodicos/limitaciones/uso_de_cpu.sh
-. ./modulos/periodicos/limitaciones/uso_de_mem.sh
-. ./modulos/periodicos/limitaciones/cantidad_de_procesos.sh
-. ./modulos/periodicos/limitaciones/cantidad_de_archivos_abiertos.sh
-. ./modulos/periodicos/limitaciones/cantidad_de_sockets_abiertos.sh
+. $CARPETA_DE_INSTALACION/modulos/periodicos/limitaciones/es_mayor_que.sh #Compara numeros decimales
+. $CARPETA_DE_INSTALACION/modulos/periodicos/limitaciones/uso_de_cpu.sh
+. $CARPETA_DE_INSTALACION/modulos/periodicos/limitaciones/uso_de_mem.sh
+. $CARPETA_DE_INSTALACION/modulos/periodicos/limitaciones/cantidad_de_procesos.sh
+. $CARPETA_DE_INSTALACION/modulos/periodicos/limitaciones/cantidad_de_archivos_abiertos.sh
+. $CARPETA_DE_INSTALACION/modulos/periodicos/limitaciones/cantidad_de_sockets_abiertos.sh
 
 case $1 in
 	iniciar)

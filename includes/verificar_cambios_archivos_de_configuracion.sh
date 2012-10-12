@@ -12,7 +12,7 @@ function enviar_senial()
 function el_modulos_esta_activo()
 {
 	#$1 es el nombre del modulo
-	local CONFIG_DEL_MODULO=`( cat $MODULOS_DE_COMANDO;cat $MODULOS_PERIODICOS ) | grep -E "\/.*/$1\.sh\:.."
+	local CONFIG_DEL_MODULO=`( cat $MODULOS_DE_COMANDO;cat $MODULOS_PERIODICOS ) | grep -E "\/.*/$1\.sh\:.."`
 	local SEPARACION=`expr index "$CONFIG_DEL_MODULO" ":"`
 	local MODULO_ACTIVO=${CONFIG_DEL_MODULO:$SEPARACION}
 	if [ "$MODULO_ACTIVO" = "on" ];then
@@ -27,7 +27,8 @@ while ( sleep $1 );do
 	for ARCHIVO in `ls $ARCHIVOS_DE_CONFIGURACION_MODULOS/*/*.conf` #TODO:No abria que depender de la extencion .conf
 	do		
 		#Obtengo el nombre del modulo
-		MODULO=`echo $ARCHIVO | sed -e "s/^\/.*\///g" | sed -e "s/\..*//g"` #devuelve ej: /home/utnso/.shield/modulos/seguridad.conf -> seguridad
+		#MODULO=`echo $A | cut -d "/" -f 6 | cut -d "." -f 1` #Opcion alternativa		
+		MODULO=`echo $ARCHIVO | sed -e "s/^\/.*\///g" | sed -e "s/\..*//g"` #devuelve ej: /home/$USER/.shield/modulos/seguridad.conf -> seguridad
 	
 		ULTIMA_MODICIFACION=`stat -c "%Y" $ARCHIVO`
 		el_modulos_esta_activo $MODULO

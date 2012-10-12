@@ -3,8 +3,6 @@
 function calcular_uso_cpu()
 {
 	#Variables
-	TERMINAL_DE_LA_SESSION=`tty`
-	TTY=${TERMINAL_DE_LA_SESSION:5:9} #Le saco /dev/ para que quede solo la terminal
 	typeset -i SUMA_TIME1=0
 	typeset -i SUMA_TIME2=0
 

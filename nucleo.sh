@@ -1,18 +1,20 @@
 #!/bin/bash
 
-. /home/utnso/TP1---SHIELD---SO/includes/prompt.sh
+source /home/$USER/.shield/install.conf
+
+. $CARPETA_DE_INSTALACION/includes/prompt.sh
 #Incluciones de variables
-. /home/utnso/TP1---SHIELD---SO/includes/nucleo.variables
+. $CARPETA_DE_INSTALACION/includes/nucleo.variables
 
 #Incluciones de funcionalidad
-. /home/utnso/TP1---SHIELD---SO/includes/validar_comando.sh
-. /home/utnso/TP1---SHIELD---SO/includes/es_un_built_in.sh
-. /home/utnso/TP1---SHIELD---SO/includes/ejecutar_built_in.sh
-. /home/utnso/TP1---SHIELD---SO/includes/ejecutar_comando.sh
-. /home/utnso/TP1---SHIELD---SO/includes/inicializar_modulos.sh
-. /home/utnso/TP1---SHIELD---SO/includes/detener_modulos.sh
-. /home/utnso/TP1---SHIELD---SO/includes/registrar_e_inicializar_modulos.sh
-. /home/utnso/TP1---SHIELD---SO/includes/terminar_procesos_en_segundo_plano.sh
+. $CARPETA_DE_INSTALACION/includes/validar_comando.sh
+. $CARPETA_DE_INSTALACION/includes/es_un_built_in.sh
+. $CARPETA_DE_INSTALACION/includes/ejecutar_built_in.sh
+. $CARPETA_DE_INSTALACION/includes/ejecutar_comando.sh
+. $CARPETA_DE_INSTALACION/includes/inicializar_modulos.sh
+. $CARPETA_DE_INSTALACION/includes/detener_modulos.sh
+. $CARPETA_DE_INSTALACION/includes/registrar_e_inicializar_modulos.sh
+. $CARPETA_DE_INSTALACION/includes/terminar_procesos_en_segundo_plano.sh
 
 
 #Variables de uso comun
@@ -26,10 +28,10 @@ if [ $? = 1 ];then #Se produjo un error en algun modulo
 fi
 
 #Verificar cambios en los archivos de configuracion en segundo plano
-bash /home/utnso/TP1---SHIELD---SO/includes/verificar_cambios_archivos_de_configuracion.sh $TIEMPO_VERIFICAR_ARCHIVOS_DE_CONFIGURACION & 
+bash $CARPETA_DE_INSTALACION/includes/verificar_cambios_archivos_de_configuracion.sh $TIEMPO_VERIFICAR_ARCHIVOS_DE_CONFIGURACION & 
 
 #Ejecucion de modulos periodicos en segundo plano
-bash /home/utnso/TP1---SHIELD---SO/includes/ejecutar_modulos_periodicos.sh $TIEMPO_MODULOS_PERIODICOS & 
+bash $CARPETA_DE_INSTALACION/includes/ejecutar_modulos_periodicos.sh $TIEMPO_MODULOS_PERIODICOS & 
 
 while [ true ]
 do
@@ -37,7 +39,7 @@ do
   trap "terminar_procesos_en_segundo_plano TERM;exit 1" SIGUSR1 
   
   #Capturar señal enviada por el cambio en algun archivo de programacion
-  trap "registrar_e_inicializar_modulos;if [ $? = 1 ];then exit 1;fi;bash /home/utnso/TP1---SHIELD---SO/includes/verificar_cambios_archivos_de_configuracion.sh $TIEMPO_VERIFICAR_ARCHIVOS_DE_CONFIGURACION &" SIGUSR2 #TODO:Extraer en una sola funcion registrar_e_inicializar_modulos y verificar_cambios_archivos_de_configuracion
+  trap "registrar_e_inicializar_modulos;if [ $? = 1 ];then exit 1;fi;bash $CARPETA_DE_INSTALACION/includes/verificar_cambios_archivos_de_configuracion.sh $TIEMPO_VERIFICAR_ARCHIVOS_DE_CONFIGURACION &" SIGUSR2 
 
   #Capturar señales de temrinacion
   trap "terminar_procesos_en_segundo_plano TERM;echo El programa finalizo.;exit 1" TERM

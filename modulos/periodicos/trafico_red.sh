@@ -5,16 +5,18 @@
 
 CANT_PAQUETESIP_SAL=$(ifconfig $(ifconfig | grep eth | awk '{print$1}') | grep -m 1 "TX" | awk '{print$2}' | cut -d ":" -f 2)
 
+SOCKETS_ABIERTOS=/tmp/SOCKETS_ABIERTOS.tmp
+IDPROCESOS_SOCKETS=/tmp/IDPROCESOS_SOCKETS.tmp
 
 case "$1" in
 	"procesar")
 		#comparo cantidad maxima de paquetes ip salientes con la cantidad actual.
 		if [ $CANT_PAQUETESIP_SAL -ge $CANT_MAX_PAQUETESIP_SAL ];then	
 			#Muestro los sockets activos
-			lsof -i | grep $USER > SOCKETS_ABIERTOS.tmp
-			cat SOCKETS_ABIERTOS.tmp 
+			lsof -i | grep $USER > $SOCKETS_ABIERTOS
+			cat $SOCKETS_ABIERTOS
 			#busco los sockets activos y elimino sus procesos. 
-			lsof -i -t > IDPROCESOS_SOCKETS.tmp
+			lsof -i -t > $IDPROCESOS_SOCKETS
 			while read line;do
         			#de los procesos encontrado me fijo a que usuario pertenecen
 				USER_PROCESO=$(ps aux | awk '{print$1,$2}' | grep $line | awk '{print$1}')
@@ -22,10 +24,10 @@ case "$1" in
 				if [ $USER_PROCESO = $USER ];then
                 			kill -9 $line
                 			echo "Se elimino el Proceso:$line USER:$USER_PROCESO"
-        			fi;done < IDPROCESOS_SOCKETS.tmp
+        			fi;done < $IDPROCESOS_SOCKETS
 			#borro archivos temporal 
-			rm IDPROCESOS_SOCKETS.tmp
-			rm SOCKETS_ABIERTOS.tmp
+			rm $IDPROCESOS_SOCKETS
+			rm $SOCKETS_ABIERTOS
 		fi
 		exit $?;;
 

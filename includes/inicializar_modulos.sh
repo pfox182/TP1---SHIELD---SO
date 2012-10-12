@@ -3,10 +3,8 @@ function inicializar_modulos()
   for MODULO in `cat $MODULOS_DE_COMANDO;cat $MODULOS_PERIODICOS` #MODULO es la ruta absoluta de cala modulo de comando + :on o :off 
   do
 	#Me fijo si esta activo
-	local SEPARACION=`expr index "$MODULO" ":"`
-	local MODULO_ACTIVO=${MODULO:$SEPARACION}
-	SEPARACION=`expr $SEPARACION - 1` #Retrocedo 1 para saltar el ":"
-	MODULO=${MODULO:0:$SEPARACION}
+	local MODULO_ACTIVO=`echo $MODULO | cut  -d ":" -f 2`
+	local MODULO=`echo $MODULO | cut  -d ":" -f 1`
 
 	if [ "$MODULO_ACTIVO" = "on" ];then
 		source $MODULO iniciar #Se utiliza source para que se exporten las variables a la sesion de trabajo

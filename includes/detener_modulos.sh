@@ -3,13 +3,11 @@ function detener_modulos()
 	for MODULO in `cat $MODULOS_DE_COMANDO;cat $MODULOS_PERIODICOS`
 	do
 		#Me fijo si esta activo
-		local SEPARACION=`expr index "$MODULO" ":"`
-		local MODULO_ACTIVO="${MODULO:$SEPARACION}"
-		SEPARACION=`expr $SEPARACION - 1` #Retrocedo 1 para saltar el ":"
-		MODULO="${MODULO:0:$SEPARACION}"
+		local MODULO_ACTIVO=`echo $MODULO | cut  -d ":" -f 2`
+		local MODULO=`echo $MODULO | cut  -d ":" -f 1`
 
 		if [ "$MODULO_ACTIVO" = "on" ];then
-			source ${MODULO:0:$SEPARACION} detener #Si se esta ejecutando se detiene
+			source $MODULO detener #Si se esta ejecutando se detiene
 			if [ $? = 1 ];then
 				local MSJ_ERR="Error al detener el modulo de $MODULO."
 				echo $MSJ_ERR

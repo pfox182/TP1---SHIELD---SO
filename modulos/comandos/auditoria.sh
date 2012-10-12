@@ -3,15 +3,17 @@
 #$1 ->Tipo de operacion
 #$2 ->String del comando (parametro)
 
-source /home/$USER/.shield/modulos/comandos/auditoria.conf
 
-OUTPUT_FILE="/home/utnso/output_auditoria"
-CONFG_FILE="/home/utnso/TP1---SHIELD---SO/modulos/comandos/auditoria.conf"
+OUTPUT_FILE="/home/$USER/.shield/output_auditoria"
+CONFG_FILE="/home/$USER/.shield/modulos/comandos/auditoria.conf"
 
 case $1 in
 	iniciar)
- 		#Leer el archivo de configuracion y exportar la variable con los valores asignados
-  		export COMANDOS=`cat $CONFG_FILE`
+ 		#Leer el archivo de configuracion
+		for VARIABLE in `cat $CONFG_FILE`
+		do
+			export $VARIABLE
+		done
 		#No se le pone exit, porque sino al llamarlo con source corta la ejecucion del script que lo llamo ( ej: nucleo.sh )
 		;;
 
@@ -37,7 +39,9 @@ case $1 in
 		;;
 
 	detener)
-		unset COMANDOS
+		unset TAMANO_MAXIMO
+		unset IP_SERVIDOR_REMOTO
+		unset TAMANO_ARCHIVO_LOG
 		;;
 
 	*)

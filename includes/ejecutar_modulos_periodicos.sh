@@ -4,7 +4,7 @@
 
 function enviar_senial()
 {
-	PID_NUCLEO=`ps auxh | grep nucleo.sh | grep $TTY | grep -v grep | awk '{ print $2 }'`
+	PID_NUCLEO=`ps auxh | grep shield.sh | grep $TTY | grep -v grep | awk '{ print $2 }'`
 	kill -USR1 $PID_NUCLEO	
 }
 
@@ -12,10 +12,8 @@ while ( sleep $1 );do
 	for MODULO in `cat $MODULOS_PERIODICOS`
 	do	
 		#Me fijo si esta activo
-		SEPARACION=`expr index "$MODULO" ":"`
-		MODULO_ACTIVO="${MODULO:$SEPARACION}"
-		SEPARACION=`expr $SEPARACION - 1` #Retrocedo 1 para saltar el ":"
-		MODULO="${MODULO:0:$SEPARACION}"
+		MODULO_ACTIVO=`echo $MODULO | cut  -d ":" -f 2`
+		MODULO=`echo $MODULO | cut  -d ":" -f 1`
 
 		if [ "$MODULO_ACTIVO" = "on" ];then #Si esta activo	
 			bash $MODULO procesar

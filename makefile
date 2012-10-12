@@ -1,7 +1,7 @@
 #Makefile
 
 #Variables
-USUARIO=ktta
+USUARIO=martin
 
 #Directorios de instalacion
 DIR_SHIELD=/etc/shield
@@ -38,6 +38,7 @@ desinstalar:
 	rm $(DIR_ENLACE)/shield.sh
 	exit 0
 configurar:
+	#TODO: Si no lo puede configurar hay que volver atras
 	bash comprobar_si_es_root.sh || exit 1
 	#Validaciones
 	test -d $(DIR_SHIELD) || (echo "Shield no se encuentra instalado";exit 1)	
@@ -46,11 +47,19 @@ configurar:
 	!(test -d $(DIR_CONFIG)) || (echo "El directorio $(DIR_CONFIG) ya existe.";exit 1)
 	#Copiamos la configuracion
 	mkdir $(DIR_CONFIG)	
-	cp -R config/modulos $(DIR_CONFIG)/
-	cp config/modulos_de_comando.config $(DIR_CONFIG)/
-	cp config/modulos_periodicos.config $(DIR_CONFIG)/
+	cp -r config/modulos $(DIR_CONFIG)/
+	#cp config/modulos_de_comando.config $(DIR_CONFIG)/
+	#cp config/modulos_periodicos.config $(DIR_CONFIG)/
+	echo "export CARPETA_DE_INSTALACION="$(DIR_SHIELD) > $(DIR_CONFIG)/install.conf
+	echo $(DIR_SHIELD)/modulos/comandos/seguridad.sh:on > $(DIR_CONFIG)/modulos_de_comando.conf
+	echo $(DIR_SHIELD)/modulos/comandos/auditoria.sh:on >> $(DIR_CONFIG)/modulos_de_comando.conf
+	echo $(DIR_SHIELD)/modulos/comandos/control_sesiones.sh:on >> $(DIR_CONFIG)/modulos_de_comando.conf
+	echo $(DIR_SHIELD)/modulos/periodicos/limitaciones.sh:off > $(DIR_CONFIG)/modulos_periodicos.conf
+	echo $(DIR_SHIELD)/modulos/periodicos/trafico_red.sh:on >> $(DIR_CONFIG)/modulos_periodicos.conf
+	echo $(DIR_SHIELD)/modulos/periodicos/control_carga.sh:on >> $(DIR_CONFIG)/modulos_periodicos.conf
+
 	#Configuramos los permisos del directorio de configuracion
-	chmod -R 644 $(DIR_CONFIG)
+	chmod -R 777 $(DIR_CONFIG)
 	#Le asignamos la shell al usuario
 	chsh -s $(DIR_ENLACE)/shield.sh $(USUARIO)
 	exit 0
@@ -69,6 +78,7 @@ desinstalarTODO:
 	rm -Rf $(DIR_CONFIG)
 	rm -Rf $(DIR_SHIELD)
 	rm $(DIR_ENLACE)/shield.sh
+	chsh -s /bin/bash $(USUARIO)
 	exit 0
 
 	

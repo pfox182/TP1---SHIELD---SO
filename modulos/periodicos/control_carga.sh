@@ -10,7 +10,7 @@ case "$1" in
 		NICE_PROCESO=$(ps -Al | grep -m 1 $ID_PROCESO | awk '{print $8}')
 			if [ $CONSUMO_CPU_PROCESO -ge $MAX_CONSUMO_CPU ];then
 				#Aumento el nice de ID_PROCESO
-				renice +$(expr $NICE_PROCESO + 5) $ID_PROCESO > null
+				renice +$(expr $NICE_PROCESO + 5) $ID_PROCESO > /dev/null
 				#comparo con el proceso anterior para ver si es el mismo o si reseteo la cantidad de nice
 				if [[ $ID_PROCESO = $ID_PROCESO_ANTERIOR ]];then
 					CANT_NICE=$(expr $CANT_NICE + 1)
