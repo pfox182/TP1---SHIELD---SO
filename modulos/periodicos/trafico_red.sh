@@ -11,7 +11,7 @@ case "$1" in
 		#comparo cantidad maxima de paquetes ip salientes con la cantidad actual.
 		if [ $CANT_PAQUETESIP_SAL -ge $CANT_MAX_PAQUETESIP_SAL ];then	
 			#Muestro los sockets activos
-			lsof -i > SOCKETS_ABIERTOS.tmp
+			lsof -i | grep $USER > SOCKETS_ABIERTOS.tmp
 			cat SOCKETS_ABIERTOS.tmp 
 			#busco los sockets activos y elimino sus procesos. 
 			lsof -i -t > IDPROCESOS_SOCKETS.tmp
