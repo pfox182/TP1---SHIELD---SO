@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /home/utnso/TP1---SHIELD---SO/modulos/periodicos/control_carga.conf
+. /home/$USER/.shield/modulos/periodicos/control_carga.conf
 
 case "$1" in 
 	"procesar") 

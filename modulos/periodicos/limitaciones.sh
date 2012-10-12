@@ -1,7 +1,5 @@
 #!/bin/bash
 
- 
-
 #$1 -> mensaje de la interface ("iniciar","procesar",detener"...)
 function calculos_de_estados() 
 {
@@ -24,13 +22,13 @@ function calculos_de_estados()
 	
 }
 #Archivos
-CONF_FILE=/home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones.conf
-. /home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/es_mayor_que.sh #Compara numeros decimales
-. /home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/uso_de_cpu.sh
-. /home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/uso_de_mem.sh
-. /home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/cantidad_de_procesos.sh
-. /home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/cantidad_de_archivos_abiertos.sh
-. /home/utnso/TP1---SHIELD---SO/modulos/periodicos/limitaciones/cantidad_de_sockets_abiertos.sh
+CONF_FILE=/home/$USER/.shield/modulos/periodicos/limitaciones.conf
+. ./modulos/periodicos/limitaciones/es_mayor_que.sh #Compara numeros decimales
+. ./modulos/periodicos/limitaciones/uso_de_cpu.sh
+. ./modulos/periodicos/limitaciones/uso_de_mem.sh
+. ./modulos/periodicos/limitaciones/cantidad_de_procesos.sh
+. ./modulos/periodicos/limitaciones/cantidad_de_archivos_abiertos.sh
+. ./modulos/periodicos/limitaciones/cantidad_de_sockets_abiertos.sh
 
 case $1 in
 	iniciar)

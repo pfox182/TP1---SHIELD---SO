@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #cargo archivo de configuracion
-. /home/utnso/TP1---SHIELD---SO/modulos/periodicos/trafico_red.conf 
+. /home/$USER/.shield/modulos/periodicos/trafico_red.conf 
 
 CANT_PAQUETESIP_SAL=$(ifconfig $(ifconfig | grep eth | awk '{print$1}') | grep -m 1 "TX" | awk '{print$2}' | cut -d ":" -f 2)
 
