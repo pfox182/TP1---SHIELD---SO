@@ -3,7 +3,7 @@
 #$1 ->Tipo de operacion
 #$2 ->String del comando (parametro)
 
-source /home/utnso/TP1---SHIELD---SO/modulos/comandos/auditoria.conf
+source /home/$USER/.shield/modulos/comandos/auditoria.conf
 
 OUTPUT_FILE="/home/utnso/output_auditoria"
 CONFG_FILE="/home/utnso/TP1---SHIELD---SO/modulos/comandos/auditoria.conf"

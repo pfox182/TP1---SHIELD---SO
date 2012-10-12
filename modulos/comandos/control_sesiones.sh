@@ -2,7 +2,7 @@
 
 
 #Cargo archivo de configuracion
-. /home/utnso/TP1---SHIELD---SO/modulos/comandos/control_sesiones.conf
+. /home/$USER/.shield/modulos/comandos/control_sesiones.conf
 
 #Cantidad de sesiones abiertas por un mismo usuario
 CANT_SESIONES=`ps aux | grep nucleo.sh | grep -v grep | grep $USER | wc -l`

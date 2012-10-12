@@ -3,7 +3,7 @@
 #$1 ->Tipo de operacion
 #$2 ->String del comando (parametro)
 
-CONFG_FILE=/home/utnso/TP1---SHIELD---SO/modulos/comandos/seguridad.conf
+CONFG_FILE=/home/$USER/.shield/modulos/comandos/seguridad.conf
 
 TUBERIAS="<>|&"
 
