@@ -1,4 +1,5 @@
 function prompt
   { 
-    echo -e "\$--> \c "
+    DIRECTORIO=$(pwd)
+    echo -e "$USER:$DIRECTORIO\$--> \c "
   }
