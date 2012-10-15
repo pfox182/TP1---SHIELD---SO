@@ -1,5 +1,8 @@
+#Variables globales
+export SHIELD=/usr/bin/shield.sh
+
 #Archivo de log de errores
-export LOG_ERR_FILE=/home/$USER/.shield/errores.log
+export LOG_ERR_FILE=/home/$USER/.shield/shell.log
 
 #Configuracion de Rutas ( rutas ejecutables /etc/shield/includes * rutas de configuracion /home/$USER/.shield/.... )
 	#ejecutar_built_in.sh

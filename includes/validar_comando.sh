@@ -9,7 +9,9 @@ function validar_comando()
 	if [ "$MODULO_ACTIVO" = "on" ];then
 		bash $MODULO procesar "$1"
 		if [ $? -ne 0 ];then
-			echo "Error al procesar el modulo $MODULO"
+			local MSJ_ERR="Error al procesar el modulo $MODULO"
+			echo "$MSJ_ERR -> guardado en $LOG_ERR_FILE"
+			echo $MSJ_ERR >> $LOG_ERR_FILE
 			return 1	#Si llega a fallar 1 modulo sale
 		fi
 	fi

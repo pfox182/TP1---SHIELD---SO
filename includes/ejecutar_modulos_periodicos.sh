@@ -4,7 +4,7 @@
 
 function enviar_senial()
 {
-	PID_NUCLEO=`ps auxh | grep shield.sh | grep $TTY | grep -v grep | awk '{ print $2 }'`
+	PID_NUCLEO=`ps auxh | grep $SHIELD | grep $TTY | grep -v grep | awk '{ print $2 }'`
 	kill -USR1 $PID_NUCLEO	
 }
 
@@ -18,6 +18,9 @@ while ( sleep $1 );do
 		if [ "$MODULO_ACTIVO" = "on" ];then #Si esta activo	
 			bash $MODULO procesar
 			if [ $? -ne 0 ] ;then
+				local MSJ_ERR="Error al procesar el modulo $MODULO"
+				echo "$MSJ_ERR -> guardado en $LOG_ERR_FILE"
+				echo $MSJ_ERR >> $LOG_ERR_FILE
 				enviar_senial
 				exit 1
 			fi
