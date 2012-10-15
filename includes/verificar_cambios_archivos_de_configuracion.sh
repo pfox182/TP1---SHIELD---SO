@@ -5,7 +5,7 @@
 
 function enviar_senial()
 {
-	PID_NUCLEO=`ps auxh | grep nucleo.sh | grep $TTY | grep -v grep | awk '{ print $2 }'`
+	PID_NUCLEO=`ps auxh | grep shield.sh | grep $TTY | grep -v grep | awk '{ print $2 }'`
 	kill -USR2 $PID_NUCLEO	
 }
 
