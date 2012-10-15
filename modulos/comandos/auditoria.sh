@@ -23,6 +23,9 @@ case $1 in
 	          TAMANO_ARCHIVO_LOG=`stat -c %s $OUTPUT_FILE` #Obtengo el tamaño del archivo de log local.
 			if [ $TAMANO_ARCHIVO_LOG -gt $TAMANO_MAXIMO ]; then
 			  echo "supero el tamaño del log local, se comenzara a loguear en el servidor remoto."
+			  #Obtengo el usuario para loguearme en el servidor remoto,y me logueo al mismo, 				   actualizando el archivo de log remoto.
+			  USER=`whoami`
+			  `ssh $USER@$IP_SERVIDOR_REMOTO " $2 " >> "$OUTPUT_FILE"`
 			else
 		       	  echo $2 >> $OUTPUT_FILE
 			fi
@@ -31,6 +34,7 @@ case $1 in
 	        fi 
 	        exit 0
 	        ;;
+
 
 	informacion)
   		TAMANO_ARCHIVO_LOG=`stat -c %s $OUTPUT_FILE` #Obtengo el tamaño del archivo de log local.	
