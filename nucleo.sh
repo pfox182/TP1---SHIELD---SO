@@ -17,14 +17,9 @@ source /home/$USER/.shield/tiempos.conf
 . $CARPETA_DE_INSTALACION/includes/registrar_e_inicializar_modulos.sh
 . $CARPETA_DE_INSTALACION/includes/terminar_procesos_en_segundo_plano.sh
 
-
-#Variables de uso comun
-export TERMINAL_DE_LA_SESSION=`tty`
-export TTY=${TERMINAL_DE_LA_SESSION:5} 
-
 #Registrar e inicializar todos los modulos
 registrar_e_inicializar_modulos
-if [ $? = 1 ];then #Se produjo un error en algun modulo
+if [ $? -ne 0 ];then #Se produjo un error en algun modulo
 	exit 1
 fi
 
@@ -40,7 +35,7 @@ do
   trap "terminar_procesos_en_segundo_plano TERM;exit 1" SIGUSR1 
   
   #Capturar señal enviada por el cambio en algun archivo de programacion
-  trap "registrar_e_inicializar_modulos;if [ $? = 1 ];then exit 1;fi;bash $CARPETA_DE_INSTALACION/includes/verificar_cambios_archivos_de_configuracion.sh $TIEMPO_VERIFICAR_ARCHIVOS_DE_CONFIGURACION &" SIGUSR2 
+  trap "registrar_e_inicializar_modulos;if [ $? -ne 0 ];then exit 1;fi;bash $CARPETA_DE_INSTALACION/includes/verificar_cambios_archivos_de_configuracion.sh $TIEMPO_VERIFICAR_ARCHIVOS_DE_CONFIGURACION &" SIGUSR2 
 
   #Capturar señales de temrinacion
   trap "terminar_procesos_en_segundo_plano TERM;echo El programa finalizo.;exit 1" TERM
