@@ -22,7 +22,7 @@ if ( ! test -e $DIR_SHIELD/nucleo.sh );then
 	exit 1
 fi
 #Compruebo si existe el enlace simbolico
-if ( ! test -e $DIR_ENLACE/shield.sh )
+if ( ! test -e $DIR_ENLACE/shield.sh );then
 	echo "El enlace $DIR_ENLACE/shield.sh no existe."
 	exit 1
 fi

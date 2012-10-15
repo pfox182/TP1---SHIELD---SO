@@ -1,7 +1,7 @@
 #Makefile
 
 #Variables
-export USUARIO=martin
+export USUARIO=ktta
 
 #Directorios de instalacion
 export DIR_SHIELD=/etc/shield
@@ -42,7 +42,7 @@ configurar:
 	#Restricciones
 	bash make/comprobar_si_es_root.sh || exit 1
 	#Validaciones
-	bash make/validar_configurar || exit 1	
+	bash make/validar_configurar.sh || exit 1	
 	#Copiamos la configuracion
 	mkdir $(DIR_CONFIG)	
 	cp config/tiempos.conf $(DIR_CONFIG)/

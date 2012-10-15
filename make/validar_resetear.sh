@@ -22,13 +22,14 @@ if ( ! test -e $DIR_SHIELD/nucleo.sh );then
 	exit 1
 fi
 #Compruebo si existe el enlace simbolico
-if ( ! test -e $DIR_ENLACE/shield.sh )
+if ( ! test -e $DIR_ENLACE/shield.sh );then
 	echo "El enlace $DIR_ENLACE/shield.sh no existe."
 	exit 1
 fi
 #Compruebo si el usuario a configurar tiene shield
-bash make/usuario_sin_shield.sh $USUARIO #Si el usuario tiene shield, el retorna error, por eso comparo = 1
-if [ $? = 1 ];then
+SHELL=`cat /etc/passwd | grep $USUARIO | grep shield.sh | wc -l` #Se fija SHIELD esta asignada al usuario
+if [ $SHELL = 0 ];then
+	echo "El usuario no tiene la shell asignada"
 	exit 1
 fi
 if ( ! test -d $DIR_CONFIG );then
