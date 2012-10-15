@@ -48,13 +48,12 @@ configurar:
 	#Copiamos la configuracion
 	mkdir $(DIR_CONFIG)	
 	cp -r config/modulos $(DIR_CONFIG)/
-	#cp config/modulos_de_comando.config $(DIR_CONFIG)/
-	#cp config/modulos_periodicos.config $(DIR_CONFIG)/
+	cp config/tiempos.conf $(DIR_CONFIG)/
 	echo "export CARPETA_DE_INSTALACION="$(DIR_SHIELD) > $(DIR_CONFIG)/install.conf
 	echo $(DIR_SHIELD)/modulos/comandos/seguridad.sh:on > $(DIR_CONFIG)/modulos_de_comando.conf
 	echo $(DIR_SHIELD)/modulos/comandos/auditoria.sh:on >> $(DIR_CONFIG)/modulos_de_comando.conf
 	echo $(DIR_SHIELD)/modulos/comandos/control_sesiones.sh:on >> $(DIR_CONFIG)/modulos_de_comando.conf
-	echo $(DIR_SHIELD)/modulos/periodicos/limitaciones.sh:off > $(DIR_CONFIG)/modulos_periodicos.conf
+	echo $(DIR_SHIELD)/modulos/periodicos/limitaciones.sh:on > $(DIR_CONFIG)/modulos_periodicos.conf
 	echo $(DIR_SHIELD)/modulos/periodicos/trafico_red.sh:on >> $(DIR_CONFIG)/modulos_periodicos.conf
 	echo $(DIR_SHIELD)/modulos/periodicos/control_carga.sh:on >> $(DIR_CONFIG)/modulos_periodicos.conf
 

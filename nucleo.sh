@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source /home/$USER/.shield/install.conf
+source /home/$USER/.shield/tiempos.conf
 
 . $CARPETA_DE_INSTALACION/includes/prompt.sh
 #Incluciones de variables
