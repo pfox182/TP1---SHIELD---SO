@@ -8,7 +8,7 @@ if ( ! test -d $DIR_SHIELD/modulos );then
 	echo "El directorio $DIR_SHIELD/modulos no existe."
 	exit 1
 fi
-if ( ! test -d $DIR_SHIELD/built_in );then
+if ( ! test -d $DIR_SHIELD/built-in );then
 	echo "El directorio $DIR_SHIELD/built-in no existe."
 	exit 1
 fi
