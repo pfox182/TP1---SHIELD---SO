@@ -7,10 +7,10 @@ function detener_modulos()
 		local MODULO=`echo $MODULO | cut  -d ":" -f 1`
 
 		if [ "$MODULO_ACTIVO" = "on" ];then
-			source $MODULO detener #Si se esta ejecutando se detiene
+			source $MODULO detener 
 			if [ $? = 1 ];then
 				local MSJ_ERR="Error al detener el modulo de $MODULO."
-				echo $MSJ_ERR
+				echo "$MSJ_ERR -> guardado en $LOG_ERR_FILE"
 				echo $MSJ_ERR >> $LOG_ERR_FILE
 				return 1
 			fi
