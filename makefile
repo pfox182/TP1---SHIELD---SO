@@ -25,7 +25,7 @@ instalar:
 	#Creamos el enlace simbolico
 	(test -e $(DIR_SHIELD)/nucleo.sh) || (echo "No existe $(DIR_SHIELD)/nucleo.sh , para crear el enlace simbolico";exit 1)
 	ln $(DIR_SHIELD)/nucleo.sh $(DIR_ENLACE)/shield.sh
-	chmod 555 $(DIR_ENLACE)/shield.sh
+	chmod 755 $(DIR_ENLACE)/shield.sh
 	bash make/unset_variables.sh
 	exit 0	
 
@@ -54,8 +54,16 @@ configurar:
 	echo $(DIR_SHIELD)/modulos/periodicos/limitaciones.sh:on > $(DIR_CONFIG)/modulos_periodicos.conf
 	echo $(DIR_SHIELD)/modulos/periodicos/trafico_red.sh:on >> $(DIR_CONFIG)/modulos_periodicos.conf
 	echo $(DIR_SHIELD)/modulos/periodicos/control_carga.sh:on >> $(DIR_CONFIG)/modulos_periodicos.conf
+	touch $(DIR_CONFIG)/output_auditoria
+	#Creamos carpeta para archivos temporales
+	mkdir $(DIR_CONFIG)/tmps
 	#Configuramos los permisos del directorio de configuracion
-	chmod -R 555 $(DIR_CONFIG)
+	chmod -R 777 $(DIR_CONFIG)
+	#chmod 777 $(DIR_CONFIG)/output_auditoria #TODO: Habria que vero como hacer para que no tenga permisos 777
+	#chmod 777 $(DIR_CONFIG)/tmps
+	#Configuramos el /etc/sudoers para apagar la pc sin pedir password
+	echo "$(USUARIO) ALL = NOPASSWD: /sbin/poweroff" > /etc/sudoers.d/$(USUARIO)
+	chmod 0440 /etc/sudoers.d/$(USUARIO) #Es necesario para las politicas de seguridad de sudo
 	#Le asignamos la shell al usuario
 	chsh -s $(DIR_ENLACE)/shield.sh $(USUARIO)
 	bash make/unset_variables.sh
@@ -64,6 +72,9 @@ resetear:
 	bash "make/comprobar_si_es_root.sh" || exit 1
 	#Validaciones
 	bash make/validar_resetear.sh || exit 1
+	#Reseteamnos al usuario
+	rm -f /etc/sudoers.d/$(USUARIO)
+	mv /etc/sudoers.tmp /etc/sudoers
 	chsh -s /bin/bash $(USUARIO)
 	rm -Rf $(DIR_CONFIG)
 	bash make/unset_variables.sh
