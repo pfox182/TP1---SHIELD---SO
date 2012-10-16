@@ -3,7 +3,7 @@ export SHIELD=/usr/bin/shield.sh
 export SHIELD_CONF=/home/$USER/.shield
 export TERMINAL_DE_LA_SESSION=`tty`
 export TTY=${TERMINAL_DE_LA_SESSION:5} 
-
+export TTY_FILE=${TTY:0:3}-${TTY:4}
 #Archivo de log de errores
 export LOG_ERR_FILE=/home/$USER/.shield/shell.log
 
@@ -11,8 +11,8 @@ export LOG_ERR_FILE=/home/$USER/.shield/shell.log
 	#ejecutar_built_in.sh
 		export PATH_BUILTS=$CARPETA_DE_INSTALACION/built-in/
 	#ejecutar_comando.sh
-		export ERROR_FILE_DIR=/home/$USER/.shield
-		export ERROR_FILE=$ERROR_FILE_DIR/.error.tmp
+		export ERROR_FILE_DIR=/tmp
+		export ERROR_FILE=$ERROR_FILE_DIR/.error-$TTY_FILE.tmp
 	#es_un_built_in.sh
 		export BUILT_IN_LIST=$CARPETA_DE_INSTALACION/includes/built_in.list
 	#validar_comando.sh
