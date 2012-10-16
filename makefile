@@ -74,7 +74,6 @@ resetear:
 	bash make/validar_resetear.sh || exit 1
 	#Reseteamnos al usuario
 	rm -f /etc/sudoers.d/$(USUARIO)
-	mv /etc/sudoers.tmp /etc/sudoers
 	chsh -s /bin/bash $(USUARIO)
 	rm -Rf $(DIR_CONFIG)
 	bash make/unset_variables.sh
