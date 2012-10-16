@@ -1,6 +1,18 @@
 #!/bin/bash
+#Validaciones de existencia de archvios principales
+if ( test -e /home/$USER/.shield/install.conf );then
+	source /home/$USER/.shield/install.conf
+else
+	echo "No existe el archivo /home/$USER/.shield/install.conf"
+	exit 1
+fi
+if ( test -e $CARPETA_DE_INSTALACION/includes/validar_existencia_de_archivos_del_nucleo.sh );then
+	source $CARPETA_DE_INSTALACION/includes/validar_existencia_de_archivos_del_nucleo.sh
+else
+	echo "No existe el archivo /$CARPETA_DE_INSTALACION/includes/validar_existencia_de_archivos_del_nucleo.sh."
+	exit 1
+fi
 
-source /home/$USER/.shield/install.conf
 source /home/$USER/.shield/tiempos.conf
 
 . $CARPETA_DE_INSTALACION/includes/prompt.sh
@@ -41,6 +53,7 @@ do
   trap "terminar_procesos_en_segundo_plano TERM;echo El programa finalizo.;exit 1" TERM
   trap "terminar_procesos_en_segundo_plano TERM;echo El programa termino inesperadamente.;exit 1" SIGINT
   trap "terminar_procesos_en_segundo_plano TERM;echo El programa termino inesperadamente.;exit 1" KILL
+  trap "terminar_procesos_en_segundo_plano TERM;echo El programa termino inesperadamente.;exit 1" EXIT
 	
   #Comenzar a leer comandos
   prompt;read STRING
