@@ -8,6 +8,8 @@ OUTPUT_FILE="/home/$USER/.shield/output_auditoria"
 CONFG_FILE="/home/$USER/.shield/modulos/comandos/auditoria.conf"
 
 case $1 in
+	"") #Mensaje vacio
+		;;
 	iniciar)
  		#Leer el archivo de configuracion
 		for VARIABLE in `cat $CONFG_FILE`
@@ -39,7 +41,6 @@ case $1 in
 	informacion)
   		TAMANO_ARCHIVO_LOG=`stat -c %s $OUTPUT_FILE` #Obtengo el tamaño del archivo de log local.	
 		echo "Tamaño maximo del archivo local de log: $TAMANO_MAXIMO , IP del servidor remoto de 			logueo: $IP_SERVIDOR_REMOTO , tamaño del archivo de log local: $TAMANO_ARCHIVO_LOG."
-		exit 0
 		;;
 
 	detener)
