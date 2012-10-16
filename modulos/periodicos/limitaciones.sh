@@ -24,6 +24,7 @@ function calculos_de_estados()
 
 #Archivos
 CONF_FILE=/home/$USER/.shield/modulos/periodicos/limitaciones.conf
+#Son las funciones que utiliza para los calculos
 . $CARPETA_DE_INSTALACION/modulos/periodicos/limitaciones/es_mayor_que.sh #Compara numeros decimales
 . $CARPETA_DE_INSTALACION/modulos/periodicos/limitaciones/uso_de_cpu.sh
 . $CARPETA_DE_INSTALACION/modulos/periodicos/limitaciones/uso_de_mem.sh
@@ -32,13 +33,20 @@ CONF_FILE=/home/$USER/.shield/modulos/periodicos/limitaciones.conf
 . $CARPETA_DE_INSTALACION/modulos/periodicos/limitaciones/cantidad_de_sockets_abiertos.sh
 
 case $1 in
+	"") #Mensaje vacio
+		;;
 	iniciar)
-		  #Leer el archivo de configuracion
-		  for VARIABLE in `cat $CONF_FILE`
-		  do
-			export $VARIABLE
-		  done
-		  ;;
+		 #Leer el archivo de configuracion
+		 if ( test -e $CONF_FILE );then #Me aseguro de que exista
+			  for VARIABLE in `cat $CONF_FILE`
+			  do
+				export $VARIABLE
+			  done
+		 else
+			echo "El archivo de configuracion $CONF_FILE de limitaciones.sh no existe"
+			exit 1
+		 fi
+		 ;;
 
 	procesar)
 		calculos_de_estados
@@ -80,8 +88,6 @@ case $1 in
 		echo "Limite de la cantidad de procesos: $MAX_PROCES , valor actual: $CANT_PROCESS_ACTUAL."
 		echo "Limite de la cantidad de archivos: $MAX_OPEN_FILES , valor actual: $CANT_ARCHIVOS_ACTUAL."
 		echo "Limite de la cantidad de archivos: $MAX_SOCK , valor actual: $CANT_SOCKETS_ACTUAL."
-	
-		exit 0
 		;;
 	detener)
 		unset MAX_CPU
