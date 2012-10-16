@@ -44,9 +44,7 @@ case $1 in
 		;;
 
 	detener)
-		if [ -n $COMANDOS_RESTRINGIDOS ];then #Si la variable esta seteada
-			unset COMANDOS_RESTRINGIDOS
-		fi
+		unset COMANDOS_RESTRINGIDOS
 		;;
 
 	*)
