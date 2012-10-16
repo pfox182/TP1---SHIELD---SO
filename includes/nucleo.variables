@@ -11,7 +11,8 @@ export LOG_ERR_FILE=/home/$USER/.shield/shell.log
 	#ejecutar_built_in.sh
 		export PATH_BUILTS=$CARPETA_DE_INSTALACION/built-in/
 	#ejecutar_comando.sh
-		export ERROR_FILE=/home/$USER/.shield/.tmp_error
+		export ERROR_FILE_DIR=/home/$USER/.shield
+		export ERROR_FILE=$ERROR_FILE_DIR/.error.tmp
 	#es_un_built_in.sh
 		export BUILT_IN_LIST=$CARPETA_DE_INSTALACION/includes/built_in.list
 	#validar_comando.sh

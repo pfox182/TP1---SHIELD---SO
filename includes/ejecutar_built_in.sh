@@ -9,7 +9,12 @@ function ejecutar_built_in()
 		local PARAMETRO=`echo ${1:$SEPARACION}`
 	fi
 	
-	bash $PATH_BUILTS$BUILT_IN.sh $PARAMETRO
+	if ( test -e $PATH_BUILTS$BUILT_IN.sh );then
+		bash $PATH_BUILTS$BUILT_IN.sh $PARAMETRO
+	else
+		echo "No existe el archivo $PATH_BUILTS$BUILT_IN.sh"
+		return 1
+	fi
 	
 	return 0
 }
