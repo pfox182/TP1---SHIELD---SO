@@ -8,7 +8,7 @@ function terminar_procesos_en_segundo_plano()
 		return 1
 	fi
 	
-	PIDS_DE_PROCESOS=`ps auxh | grep $TTY | grep -v root | grep $USER | grep -v shield.sh | awk '{ print $2 }'`
+	PIDS_DE_PROCESOS=`ps auxh | grep $TTY | grep -v root | grep $USER | grep -v $SHIELD | awk '{ print $2 }'`
 	
 	for PID in $PIDS_DE_PROCESOS
 	do

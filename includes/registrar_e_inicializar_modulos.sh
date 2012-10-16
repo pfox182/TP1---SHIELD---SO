@@ -7,13 +7,13 @@ function registrar_e_inicializar_modulos()
 	fi
 
 	detener_modulos
-	if [ $? = 1 ];then
+	if [ $? -ne 0 ];then
 		return 1
 	fi
 
 #Inicializar los modulos
 	inicializar_modulos
-	if [ $? = 1 ];then
+	if [ $? -ne 0 ];then
 		return 1
 	fi
 	
