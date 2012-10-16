@@ -8,9 +8,16 @@ CONFG_FILE=/home/$USER/.shield/modulos/comandos/seguridad.conf
 TUBERIAS="<>|&"
 
 case $1 in
+	"") #Mensaje vacio
+		;;
 	iniciar)
  		#Leer el archivo de configuracion y exportar la variable con los valores asignados
-  		export COMANDOS_RESTRINGIDOS=`cat $CONFG_FILE`
+		if ( test -e $CONFG_FILE );then #Me aseguro de que exista
+  			export COMANDOS_RESTRINGIDOS=`cat $CONFG_FILE`
+		else
+			echo "El archivo de configuracion $CONFG_FILE de seguridad.sh no existe"
+			exit 1
+		fi
 		#No se le pone exit, porque sino al llamarlo con source corta la ejecucion del script que lo llamo ( ej: nucleo.sh )
 		;;
 
@@ -39,7 +46,9 @@ case $1 in
 		;;
 
 	detener)
-		unset COMANDOS
+		if [ -n $COMANDOS_RESTRINGIDOS ];then #Si la variable esta seteada
+			unset COMANDOS_RESTRINGIDOS
+		fi
 		;;
 
 	*)
