@@ -33,7 +33,6 @@ case $1 in
   		done
 
   		#Si paso el for => no hay comandos restringidos
-  		exit 0
 		;;
  
 	informacion)
@@ -42,7 +41,6 @@ case $1 in
  		do
   			echo $COMANDO_RESTRINGIDO
  		done
-  		exit 0
 		;;
 
 	detener)
