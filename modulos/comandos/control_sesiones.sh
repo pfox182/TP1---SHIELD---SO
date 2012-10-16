@@ -5,7 +5,7 @@
 . /home/$USER/.shield/modulos/comandos/control_sesiones.conf
 
 #Cantidad de sesiones abiertas por un mismo usuario
-CANT_SESIONES=`ps aux | grep nucleo.sh | grep -v grep | grep $USER | wc -l`
+CANT_SESIONES=`ps aux | grep shield.sh | grep -v grep | grep $USER | wc -l`
 
 
 #Comparo la cantidad max permitida con la cant actual de sesiones
