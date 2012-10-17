@@ -5,8 +5,8 @@
 
 CANT_PAQUETESIP_SAL=$(ifconfig $(ifconfig | grep eth | awk '{print$1}') | grep -m 1 "TX" | awk '{print$2}' | cut -d ":" -f 2)
 
-SOCKETS_ABIERTOS=/home/$USER/.shield/SOCKETS_ABIERTOS.tmp
-IDPROCESOS_SOCKETS=/home/$USER/.shield/IDPROCESOS_SOCKETS.tmp
+SOCKETS_ABIERTOS=$TMP_FILE_DIR/SOCKETS_ABIERTOS-$TTY_FILE.tmp
+IDPROCESOS_SOCKETS=$TMP_FILE_DIR/IDPROCESOS_SOCKETS-$TTY_FILE.tmp
 
 case "$1" in
 	"procesar")

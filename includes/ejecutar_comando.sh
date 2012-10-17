@@ -7,7 +7,7 @@ function ejecutar_comando()
 		ejecutar_built_in "$1"
 		return $?
   	else #Es un comando de bash
-		if ( test -w $ERROR_FILE_DIR );then #Compruebo si tengo permiso de escritura en el directorio
+		if ( test -w $TMP_FILE_DIR );then #Compruebo si tengo permiso de escritura en el directorio
 			eval "$1" 2>$ERROR_FILE #Evaluo el comando de bash y guardo su posible error
 			if [ -s $ERROR_FILE ];then #Si existe y hay algo escrito lo muestro
 				local ERROR=`cat $ERROR_FILE`
@@ -18,7 +18,7 @@ function ejecutar_comando()
 				return 1
 			fi
 		else
-			echo "Error al crear $ERROR_FILE, el directorio $ERROR_FILE_DIR no existe o no tiene permisos de escritura"
+			echo "Error al crear $ERROR_FILE, el directorio $TMP_FILE_DIR no existe o no tiene permisos de escritura"
 			return 1
 		fi
 	fi

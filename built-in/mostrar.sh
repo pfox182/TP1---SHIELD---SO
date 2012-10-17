@@ -6,3 +6,5 @@ if ( test -n $VAR );then #Si $VAR es distinto de vacio
 else
 	echo "La variable $1 no se encuentra definida"
 fi
+
+ 
