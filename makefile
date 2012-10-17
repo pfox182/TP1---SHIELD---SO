@@ -56,7 +56,7 @@ configurar:
 	echo $(DIR_SHIELD)/modulos/periodicos/control_carga.sh:on >> $(DIR_CONFIG)/modulos_periodicos.conf
 	touch $(DIR_CONFIG)/output_auditoria
 	#Creamos carpeta para archivos temporales
-	mkdir $(DIR_CONFIG)/tmps
+	#mkdir $(DIR_CONFIG)/tmps
 	#Configuramos los permisos del directorio de configuracion
 	chmod -R 777 $(DIR_CONFIG)
 	#chmod 777 $(DIR_CONFIG)/output_auditoria #TODO: Habria que vero como hacer para que no tenga permisos 777

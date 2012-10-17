@@ -6,6 +6,7 @@
 
 OUTPUT_FILE="/home/$USER/.shield/output_auditoria"
 CONFG_FILE="/home/$USER/.shield/modulos/comandos/auditoria.conf"
+KEYS_SSH="/home/$USER/.ssh/id_rsa*"
 
 case $1 in
 	"") #Mensaje vacio
@@ -26,7 +27,10 @@ case $1 in
 			if [ $TAMANO_ARCHIVO_LOG -gt $TAMANO_MAXIMO ]; then
 			  echo "supero el tamaño del log local, se comenzara a loguear en el servidor remoto."
 			  #Obtengo el usuario para loguearme en el servidor remoto,y me logueo al mismo, 				   actualizando el archivo de log remoto.
-			  USER=`whoami`
+			  if ( ! test -e $KEY_SSH );then
+				ssh-keygen
+			   	ssh-copy-id $USER@$IP_SERVIDOR_REMOTO
+			  fi
 			  `ssh $USER@$IP_SERVIDOR_REMOTO " $2 " >> "$OUTPUT_FILE"`
 			else
 		       	  echo $2 >> $OUTPUT_FILE
