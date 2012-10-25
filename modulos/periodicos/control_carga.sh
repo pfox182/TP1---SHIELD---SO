@@ -1,10 +1,14 @@
 #!/bin/bash
 
-. /home/$USER/.shield/modulos/periodicos/control_carga.conf
+CONFG_FILE="/home/$USER/.shield/modulos/periodicos/control_carga.conf"
 
 case "$1" in 
+
+	"") #Mensaje vacio
+                ;;
+
 	"procesar") 
-		LINE=$(ps auxh | grep $USER | sort -rk3 | head -1)  
+		LINE=$(ps auxh | grep $USER | grep $TTY | sort -rk3 | head -1)  
 		ID_PROCESO=$(echo $LINE | awk '{print $2}')
 		CONSUMO_CPU_PROCESO=$(echo "$(echo $LINE | awk '{print $3}') * 10" | bc | cut -f1 -d'.')
 		NICE_PROCESO=$(ps -Al | grep -m 1 $ID_PROCESO | awk '{print $8}')
@@ -19,7 +23,7 @@ case "$1" in
 				fi
 				#si aumento mas de cuatro veces el nice de un proceso en forma continua lo elimino
 				if [ $CANT_NICE -eq 4 ];then
-					kill -9 $ID_PROCESO
+					kill -15 $ID_PROCESO
 					echo "Se elimino al proceso $ID_PROCESO del sistema"
 				fi			
 				ID_PROCESO_ANTERIOR=$ID_PROCESO
@@ -32,12 +36,21 @@ case "$1" in
 
 
 	"iniciar")
-
-		;;
+	
+	for VARIABLE in `cat $CONFG_FILE`
+	do
+		export $VARIABLE
+	done;;
 
 
 	"detener")
 		unset MAX_CONSUMO_CPU;;
+
+	*)
+                echo "El mensaje $1 no forma parte de la interface."
+                exit 1
+                ;;
+
 esac
 
 
