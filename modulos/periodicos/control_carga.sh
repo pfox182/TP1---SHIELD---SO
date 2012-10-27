@@ -23,7 +23,7 @@ case "$1" in
 				fi
 				#si aumento mas de cuatro veces el nice de un proceso en forma continua lo elimino
 				if [ $CANT_NICE -eq 4 ];then
-					kill -15 $ID_PROCESO
+					kill -9 $ID_PROCESO
 					echo "Se elimino al proceso $ID_PROCESO del sistema"
 				fi			
 				ID_PROCESO_ANTERIOR=$ID_PROCESO
@@ -40,8 +40,11 @@ case "$1" in
 	for VARIABLE in `cat $CONFG_FILE`
 	do
 		export $VARIABLE
-	done;;
-
+	done
+	export ID_PROCESO=0
+	export ID_PROCESO_ANTERIOR=0
+	export CANT_NICE=0
+	;;
 
 	"detener")
 		unset MAX_CONSUMO_CPU;;

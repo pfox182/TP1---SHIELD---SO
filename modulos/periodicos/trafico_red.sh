@@ -32,10 +32,10 @@ case "$1" in
                 			echo "Se elimino el Proceso $line del sistema."
         			fi;done < $IDPROCESOS_SOCKETS
 			#borro archivos temporal 
-			rm $IDPROCESOS_SOCKETS
-			rm $SOCKETS_ABIERTOS
+	#		rm $IDPROCESOS_SOCKETS
+	#		rm $SOCKETS_ABIERTOS
 		fi
-		exit $?;;
+		;;
 
 	"informacion")
 		echo "La cantidad actual de paquetes ip salientes es : $CANT_PAQUETESIP_SAL"
