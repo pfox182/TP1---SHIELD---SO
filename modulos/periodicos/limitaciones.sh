@@ -76,8 +76,6 @@ case $1 in
 				echo "Se sobrepaso el limite de la cantidad de sockets abiertos: $MAX_SOCK"
 				exit 1
 			fi
-		
-			exit 0 #Si no se sobrepaso ningun limite sale con 0
 			;;
 
 	informacion)

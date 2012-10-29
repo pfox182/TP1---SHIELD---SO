@@ -1,7 +1,7 @@
 #Makefile
 
 #Variables
-export USUARIO=ktta
+export USUARIO=martin
 
 #Directorios de instalacion
 export DIR_SHIELD=/etc/shield
@@ -55,12 +55,11 @@ configurar:
 	echo $(DIR_SHIELD)/modulos/periodicos/trafico_red.sh:on >> $(DIR_CONFIG)/modulos_periodicos.conf
 	echo $(DIR_SHIELD)/modulos/periodicos/control_carga.sh:on >> $(DIR_CONFIG)/modulos_periodicos.conf
 	touch $(DIR_CONFIG)/output_auditoria
-	#Creamos carpeta para archivos temporales
-	#mkdir $(DIR_CONFIG)/tmps
+	touch $(DIR_CONFIG)/shell.log
 	#Configuramos los permisos del directorio de configuracion
-	chmod -R 777 $(DIR_CONFIG)
-	#chmod 777 $(DIR_CONFIG)/output_auditoria #TODO: Habria que vero como hacer para que no tenga permisos 777
-	#chmod 777 $(DIR_CONFIG)/tmps
+	chmod -R 755 $(DIR_CONFIG)
+	chmod 666 $(DIR_CONFIG)/output_auditoria
+	chmod 666 $(DIR_CONFIG)/shell.log
 	#Configuramos el /etc/sudoers para apagar la pc sin pedir password
 	echo "$(USUARIO) ALL = NOPASSWD: /sbin/poweroff" > /etc/sudoers.d/$(USUARIO)
 	chmod 0440 /etc/sudoers.d/$(USUARIO) #Es necesario para las politicas de seguridad de sudo
@@ -82,13 +81,19 @@ resetear:
 reinstalar:
 	make desinstalar
 	make instalar
+	exit 0
 
 reconfigurar:
 	make resetear
 	make configurar
+	exit 0
 
-	
-	
+retodo:
+	make resetear
+	make desinstalar
+	make instalar
+	make configurar
+	exit 0
 	
 
 
