@@ -8,15 +8,15 @@ function ejecutar_comando()
 		return $?
   	else #Es un comando de bash
 		if ( test -w $TMP_FILE_DIR );then #Compruebo si tengo permiso de escritura en el directorio
-			eval "$1" 2>$ERROR_FILE #Evaluo el comando de bash y guardo su posible error
-			if [ -s $ERROR_FILE ];then #Si existe y hay algo escrito lo muestro
-				local ERROR=`cat $ERROR_FILE`
-				local ERROR=${ERROR#"/etc/shield/includes/ejecutar_comando.sh: línea 11:"} #Se borra el substring indicado de la cadena
-		 		echo "El comando $1 produjo un error."
-		  		echo -e "Error:\n $ERROR"
-				rm -f $ERROR_FILE #Borro el archivo de error para el proximo comando a ejecutar
-				return 1
-			fi
+			eval "$1" #2>$ERROR_FILE #Evaluo el comando de bash y guardo su posible error
+			#if [ -s $ERROR_FILE ];then #Si existe y hay algo escrito lo muestro
+				#local ERROR=`cat $ERROR_FILE`
+				#local ERROR=${ERROR#"/etc/shield/includes/ejecutar_comando.sh: línea 11:"} #Se borra el substring indicado de la cadena
+		 		#echo "El comando $1 produjo un error."
+		  		#echo -e "Error:\n $ERROR"
+				#rm -f $ERROR_FILE #Borro el archivo de error para el proximo comando a ejecutar
+				#return 1
+			#fi
 		else
 			echo "Error al crear $ERROR_FILE, el directorio $TMP_FILE_DIR no existe o no tiene permisos de escritura"
 			return 1

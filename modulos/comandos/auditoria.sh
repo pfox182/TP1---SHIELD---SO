@@ -3,10 +3,9 @@
 #$1 ->Tipo de operacion
 #$2 ->String del comando (parametro)
 
-
 OUTPUT_FILE="/home/$USER/.shield/output_auditoria"
 CONFG_FILE="/home/$USER/.shield/modulos/comandos/auditoria.conf"
-KEYS_SSH="/home/$USER/.ssh/id_rsa*"
+#KEYS_SSH="/home/$USER/.ssh/id_rsa"
 
 case $1 in
 	"") #Mensaje vacio
@@ -25,13 +24,18 @@ case $1 in
   		if [ -s "$OUTPUT_FILE" ]; then
 	          TAMANO_ARCHIVO_LOG=`stat -c %s $OUTPUT_FILE` #Obtengo el tamaño del archivo de log local.
 			if [ $TAMANO_ARCHIVO_LOG -gt $TAMANO_MAXIMO ]; then
-			  echo "supero el tamaño del log local, se comenzara a loguear en el servidor remoto."
-			  #Obtengo el usuario para loguearme en el servidor remoto,y me logueo al mismo, 				   actualizando el archivo de log remoto.
-			  if ( ! test -e $KEY_SSH );then
-				ssh-keygen
-			   	ssh-copy-id $USER@$IP_SERVIDOR_REMOTO
+			  if [ $SUPERO_LOG == 0 ]; then
+				echo "supero el tamaño del log local, se comenzara a loguear en el servidor remoto."
+				SUPERO_LOG=1
 			  fi
-			  `ssh $USER@$IP_SERVIDOR_REMOTO " $2 " >> "$OUTPUT_FILE"`
+			  #Obtengo el usuario para loguearme en el servidor remoto,y me logueo al mismo, 				   actualizando el archivo de log remoto.
+			  #if ( ! test -e $KEY_SSH );then
+				#ssh-keygen
+			   	#ssh-copy-id $USER@$IP_SERVIDOR_REMOTO
+				#bash /etc/shield/includes/key.sh
+
+			#fi
+			  `ssh $USER@$IP_SERVIDOR_REMOTO " $2 " >> "$OUTPUT_FILE" | exit`
 			else
 		       	  echo $2 >> $OUTPUT_FILE
 			fi

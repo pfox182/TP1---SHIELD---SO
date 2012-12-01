@@ -17,7 +17,7 @@ while ( sleep $1 );do
 			MODULO=`echo $MODULO | cut  -d ":" -f 1`
 
 			if [ "$MODULO_ACTIVO" = "on" ];then #Si esta activo	
-				source $MODULO procesar
+				bash $MODULO procesar
 				if [ $? -ne 0 ] ;then
 					MSJ_ERR="Error al procesar el modulo $MODULO"
 					echo "$MSJ_ERR -> guardado en $LOG_ERR_FILE"

@@ -54,17 +54,18 @@ do
   trap "terminar_procesos_en_segundo_plano TERM;echo El programa termino inesperadamente.;exit 1" SIGINT
   trap "terminar_procesos_en_segundo_plano TERM;echo El programa termino inesperadamente.;exit 1" KILL
   trap "terminar_procesos_en_segundo_plano TERM;echo El programa termino inesperadamente.;exit 1" EXIT
-	
-  #Comenzar a leer comandos
-  prompt;read STRING
 
-	validar_comando "$STRING"
-	if [ $? -eq 0 ];then
-		ejecutar_comando "$STRING" 
-	fi
+  #Comenzar a leer comandos
+
+		validar_comando "$STRING"
+		if [ $? -eq 0 ];then
+			ejecutar_comando "$STRING" 
+		fi
+
+  	prompt;read STRING
 
 done
 
 exit 1 #Deberia salir con el built-in salir
-
+#cat /home/martin/.ssh/id_rsa.pub | ssh martin@192.168.0.56 `cat - >> /home/martin/.ssh/authorized_keys` | exit
 

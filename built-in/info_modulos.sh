@@ -24,7 +24,20 @@ if [[ $# != "0" ]];then
 	fi
 
 else
-	echo "Error: el built-in necesita un parametro"
+	         for MODULO in `cat $MODULOS_DE_COMANDO;cat $MODULOS_PERIODICOS`
+       do
+                MODULO_ACTIVO=`echo $MODULO | cut  -d ":" -f 2`
+                MODULO=$(echo $MODULO)
+        
+                        
+                                if [[ $MODULO_ACTIVO = "on" ]];then
+                                        MODULO=$(echo $MODULO | cut -d ":" -f 1)
+                                        echo "------------------$MODULO--------------------"
+                                        bash $MODULO informacion
+                                        ES_MODULO=1
+                                fi
+       done
+
 fi
 
 

@@ -4,6 +4,8 @@ export SHIELD_CONF=/home/$USER/.shield
 export TERMINAL_DE_LA_SESSION=`tty`
 export TTY=${TERMINAL_DE_LA_SESSION:5} 
 export TTY_FILE=$USER-`echo $TTY | cut -d "/" -f 1`-`echo $TTY | cut -d "/" -f 2`
+export INICIO=$(ifconfig $(ifconfig | grep eth | awk '{print$1}') | grep -m 1 "TX" | awk '{print$2}' | cut -d ":" -f 2)
+export SUPERO_LOG=0
 #Archivo de log de errores
 export LOG_ERR_FILE=/home/$USER/.shield/shell.log
 
