@@ -24,20 +24,11 @@ case $1 in
   		if [ -s "$OUTPUT_FILE" ]; then
 	          TAMANO_ARCHIVO_LOG=`stat -c %s $OUTPUT_FILE` #Obtengo el tamaño del archivo de log local.
 			if [ $TAMANO_ARCHIVO_LOG -gt $TAMANO_MAXIMO ]; then
-			  if [ $SUPERO_LOG == 0 ]; then
 				echo "supero el tamaño del log local, se comenzara a loguear en el servidor remoto."
-				SUPERO_LOG=1
-			  fi
-			  #Obtengo el usuario para loguearme en el servidor remoto,y me logueo al mismo, 				   actualizando el archivo de log remoto.
-			  #if ( ! test -e $KEY_SSH );then
-				#ssh-keygen
-			   	#ssh-copy-id $USER@$IP_SERVIDOR_REMOTO
-				#bash /etc/shield/includes/key.sh
-
-			#fi
-			  `ssh $USER@$IP_SERVIDOR_REMOTO " $2 " >> "$OUTPUT_FILE" | exit`
+			 	 #`ssh $USER@$IP_SERVIDOR_REMOTO " $2 " >> "$OUTPUT_FILE" | exit`
+			  	ssh $USER@$IP_SERVIDOR_REMOTO " echo $2 >> $OUTPUT_FILE " | exit 			
 			else
-		       	  echo $2 >> $OUTPUT_FILE
+		       	  	echo $2 >> $OUTPUT_FILE
 			fi
 	        else
 	         echo $2 > $OUTPUT_FILE

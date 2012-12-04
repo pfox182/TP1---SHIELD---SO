@@ -1,5 +1,6 @@
 function terminar_procesos_en_segundo_plano()
 {
+	echo "Entre a terminar procesos en segundo plano"
 	SENIAL=$1 #Señal a enviar a los procesos de la sesion
 	
 	#Control de parametros

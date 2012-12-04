@@ -43,8 +43,18 @@ bash $CARPETA_DE_INSTALACION/includes/ejecutar_modulos_periodicos.sh $TIEMPO_MOD
 
 while [ true ]
 do
+
+  #Comenzar a leer comandos
+  	prompt;read STRING
+
+		validar_comando "$STRING"
+		if [ $? -eq 0 ];then
+			ejecutar_comando "$STRING" 
+		fi
+
+
   #Capturar señal enviada ante el error de algun modulo periodico
-  trap "terminar_procesos_en_segundo_plano TERM;exit 1" SIGUSR1 
+  trap "terminar_procesos_en_segundo_plano TERM" SIGUSR1 
   
   #Capturar señal enviada por el cambio en algun archivo de programacion
   trap "registrar_e_inicializar_modulos;if [ $? -ne 0 ];then exit 1;fi;bash $CARPETA_DE_INSTALACION/includes/verificar_cambios_archivos_de_configuracion.sh $TIEMPO_VERIFICAR_ARCHIVOS_DE_CONFIGURACION &" SIGUSR2 
@@ -54,16 +64,6 @@ do
   trap "terminar_procesos_en_segundo_plano TERM;echo El programa termino inesperadamente.;exit 1" SIGINT
   trap "terminar_procesos_en_segundo_plano TERM;echo El programa termino inesperadamente.;exit 1" KILL
   trap "terminar_procesos_en_segundo_plano TERM;echo El programa termino inesperadamente.;exit 1" EXIT
-
-  #Comenzar a leer comandos
-
-		validar_comando "$STRING"
-		if [ $? -eq 0 ];then
-			ejecutar_comando "$STRING" 
-		fi
-
-  	prompt;read STRING
-
 done
 
 exit 1 #Deberia salir con el built-in salir

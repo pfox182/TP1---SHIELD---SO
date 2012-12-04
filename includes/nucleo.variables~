@@ -1,0 +1,27 @@
+#Variables globales
+export SHIELD=/usr/bin/shield.sh
+export SHIELD_CONF=/home/$USER/.shield
+export TERMINAL_DE_LA_SESSION=`tty`
+export TTY=${TERMINAL_DE_LA_SESSION:5} 
+export TTY_FILE=$USER-`echo $TTY | cut -d "/" -f 1`-`echo $TTY | cut -d "/" -f 2`
+export INICIO=$(ifconfig $(ifconfig | grep eth | awk '{print$1}') | grep -m 1 "TX" | awk '{print$2}' | cut -d ":" -f 2)
+export SUPERO_LOG=0
+#Archivo de log de errores
+export LOG_ERR_FILE=/home/$USER/.shield/shell.log
+
+#Configuracion de Rutas ( rutas ejecutables /etc/shield/includes * rutas de configuracion /home/$USER/.shield/.... )
+	#ejecutar_built_in.sh
+		export PATH_BUILTS=$CARPETA_DE_INSTALACION/built-in/
+	#ejecutar_comando.sh
+		export TMP_FILE_DIR=/tmp
+		export ERROR_FILE=$TMP_FILE_DIR/.error-$TTY_FILE.tmp
+	#es_un_built_in.sh
+		export BUILT_IN_LIST=$CARPETA_DE_INSTALACION/includes/built_in.list
+	#validar_comando.sh
+		export MODULOS_DE_COMANDO=/home/$USER/.shield/modulos_de_comando.conf #Cada modulo termina en :on o :off
+	#inicializar_modulos.sh
+	#detener_modulos.sh
+		export MODULOS_PERIODICOS=/home/$USER/.shield/modulos_periodicos.conf #Cada modulo termina en :on o :off
+	#verificar_cambios_archivos_de_configuracion.sh ->Como es un script y no una funcion, hay que exportar la variable
+		export ARCHIVOS_DE_CONFIGURACION_MODULOS=/home/$USER/.shield/modulos
+		

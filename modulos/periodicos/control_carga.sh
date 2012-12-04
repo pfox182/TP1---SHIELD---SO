@@ -19,7 +19,7 @@ case "$1" in
 				if [[ $ID_PROCESO = $ID_PROCESO_ANTERIOR ]];then
 					CANT_NICE=$(expr $CANT_NICE + 1)
 				else	
-					CANT_NICE=1
+					CANT_NICE=0
 				fi
 				#si aumento mas de cuatro veces el nice de un proceso en forma continua lo elimino
 				if [ $CANT_NICE -eq 4 ];then

@@ -50,6 +50,10 @@ case $1 in
 
 	procesar)
 		calculos_de_estados
+			if [ $CANT_SOCKETS_ACTUAL -ge $MAX_SOCK ];then
+				echo "Se sobrepaso el limite de la cantidad de sockets abiertos: $MAX_SOCK"
+				exit 1
+			fi
 		#Control de consumo de CPU	
 			es_mayor_que $CPU_ACTUAL $MAX_CPU
 			if [ $? = 0 ];then
@@ -72,10 +76,6 @@ case $1 in
 				exit 1
 			fi
 
-			if [ $CANT_SOCKETS_ACTUAL -ge $MAX_SOCK ];then
-				echo "Se sobrepaso el limite de la cantidad de sockets abiertos: $MAX_SOCK"
-				exit 1
-			fi
 			;;
 
 	informacion)
@@ -85,7 +85,7 @@ case $1 in
 		echo "Limite de la Memoria: $MAX_MEM% , valor actual: $MEM_ACTUAL%."
 		echo "Limite de la cantidad de procesos: $MAX_PROCES , valor actual: $CANT_PROCESS_ACTUAL."
 		echo "Limite de la cantidad de archivos: $MAX_OPEN_FILES , valor actual: $CANT_ARCHIVOS_ACTUAL."
-		echo "Limite de la cantidad de archivos: $MAX_SOCK , valor actual: $CANT_SOCKETS_ACTUAL."
+		echo "Limite de la cantidad de sockets: $MAX_SOCK , valor actual: $CANT_SOCKETS_ACTUAL."
 		;;
 	detener)
 		unset MAX_CPU

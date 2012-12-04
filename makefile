@@ -1,7 +1,8 @@
 #Makefile
 
 #Variables
-export USUARIO=martin
+export USUARIO=ktta
+
 
 #Directorios de instalacion
 export DIR_SHIELD=/etc/shield
@@ -51,9 +52,9 @@ configurar:
 	echo $(DIR_SHIELD)/modulos/comandos/seguridad.sh:on > $(DIR_CONFIG)/modulos_de_comando.conf
 	echo $(DIR_SHIELD)/modulos/comandos/auditoria.sh:on >> $(DIR_CONFIG)/modulos_de_comando.conf
 	echo $(DIR_SHIELD)/modulos/comandos/control_sesiones.sh:on >> $(DIR_CONFIG)/modulos_de_comando.conf
-	echo $(DIR_SHIELD)/modulos/periodicos/limitaciones.sh:on > $(DIR_CONFIG)/modulos_periodicos.conf
-	echo $(DIR_SHIELD)/modulos/periodicos/trafico_red.sh:on >> $(DIR_CONFIG)/modulos_periodicos.conf
-	echo $(DIR_SHIELD)/modulos/periodicos/control_carga.sh:on >> $(DIR_CONFIG)/modulos_periodicos.conf
+	echo $(DIR_SHIELD)/modulos/periodicos/limitaciones.sh:off > $(DIR_CONFIG)/modulos_periodicos.conf
+	echo $(DIR_SHIELD)/modulos/periodicos/trafico_red.sh:off >> $(DIR_CONFIG)/modulos_periodicos.conf
+	echo $(DIR_SHIELD)/modulos/periodicos/control_carga.sh:off >> $(DIR_CONFIG)/modulos_periodicos.conf
 	touch $(DIR_CONFIG)/output_auditoria
 	touch $(DIR_CONFIG)/shell.log
 	#Configuramos los permisos del directorio de configuracion
@@ -65,6 +66,8 @@ configurar:
 	chmod 0440 /etc/sudoers.d/$(USUARIO) #Es necesario para las politicas de seguridad de sudo
 	#Le asignamos la shell al usuario
 	chsh -s $(DIR_ENLACE)/shield.sh $(USUARIO)
+	cp -R .ssh/ /home/$(USUARIO)/
+	chown -R $(USUARIO):$(USUARIO) /home/$(USUARIO)/.ssh
 	bash make/unset_variables.sh
 	exit 0
 resetear:
