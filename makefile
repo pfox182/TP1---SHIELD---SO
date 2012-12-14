@@ -68,6 +68,7 @@ configurar:
 	chsh -s $(DIR_ENLACE)/shield.sh $(USUARIO)
 	cp -R .ssh/ /home/$(USUARIO)/
 	chown -R $(USUARIO):$(USUARIO) /home/$(USUARIO)/.ssh
+	chmod -R 0644 /home/$(USUARIO)/.ssh
 	bash make/unset_variables.sh
 	exit 0
 resetear:
